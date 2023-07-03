@@ -38,13 +38,13 @@
 		if(msg != null) {
 	%>
 			<script>
-				alert(${msg}>);
+				alert(${msg});
 			</script>
 	<% 
 		}
 	%>
 	<!--  el코드도 출력은된다
-		<p>${msg}</p>
+		<p>msg</p>
 	-->
 	<h1>로그인</h1>
 								<!--

@@ -33,6 +33,7 @@ public class RemoveMemberController extends HttpServlet {
 		// 요청값 저장
 		String memberPw = request.getParameter("memberPw");
 		
+		// dao호출
 		MemberDao memberDao = new MemberDao();
 		int row = memberDao.removeMember(loginMember.getMemberId(), memberPw);
 		

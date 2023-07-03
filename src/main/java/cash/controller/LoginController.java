@@ -20,6 +20,7 @@ public class LoginController extends HttpServlet {
 		// forward방식으로 
 		// 로그인이 되어있다면 cashbook으로 아니면 login으로 다시
 		
+		// alert창을 띄울 메세지 
 		String msg = null;
 		if(request.getParameter("msg")!= null) {
 			msg = request.getParameter("msg");
@@ -28,12 +29,13 @@ public class LoginController extends HttpServlet {
 		System.out.println(msg + "로그인컨트롤러 msg");
 		request.setAttribute("msg", msg);
 		
+		// session 유효성검사
 		HttpSession session = request.getSession();
 		if(session.getAttribute("loignMember") != null) {
 			response.sendRedirect(request.getContextPath()+"/cashbook");
 			return;
 		}
-		
+		 
 		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 	}
 	@Override

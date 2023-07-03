@@ -17,28 +17,29 @@ import cash.vo.Member;
 public class ModifyMemberController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// view에서 온 msg변수 유효성검사 후 저장
 		String msg = null;
 		if(request.getParameter("msg") != null) {
 			msg = request.getParameter("msg");
 		}
-		
 		System.out.println(msg + "회원수정컨트롤러 msg");
 		request.setAttribute("msg", msg);
 		
+		// request값 포워드 방식으로 보내기
 		request.getRequestDispatcher("/WEB-INF/view/modifyMember.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		// session 로그인 값 저장
 		HttpSession session = request.getSession();
-		
 		Member loginMember = (Member)session.getAttribute("loginMember");
 		
+		// 요청값 저장
 		String memberPw = request.getParameter("memberPw");
 		String modifyPw = request.getParameter("modifyPw");
 		String modifyPw2 = request.getParameter("modifyPw2");
 		
+		// dao 호출
 		MemberDao memberDao = new MemberDao();
 		
 		Member member = new Member(loginMember.getMemberId(), memberPw, null, null);

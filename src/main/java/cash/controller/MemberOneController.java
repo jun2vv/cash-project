@@ -19,6 +19,7 @@ public class MemberOneController extends HttpServlet {
 		// session유효성검사
 		HttpSession session = request.getSession();
 		
+		// msg값 요청값 검사 후 저장
 		String msg = null;
 		if(request.getParameter("msg") != null) {
 			msg = request.getParameter("msg");
