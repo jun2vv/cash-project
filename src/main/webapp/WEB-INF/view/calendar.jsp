@@ -24,6 +24,7 @@
 	<!-- 자바코드(제어문) if,for문 대신 JSTL 사용 -->
 	
 	<div class="container">
+		<a style="text-align: right;" href="${pageContext.request.contextPath}/cashbook">뒤로가기</a>
 		<h1 style=" text-align: center;">${targetYear}년 ${targetMonth+1}월</h1>
 		<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
 		<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>

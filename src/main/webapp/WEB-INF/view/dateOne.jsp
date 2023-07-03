@@ -28,5 +28,7 @@
 				</tr>
 			</c:forEach>
 	</table>
+	<a style="text-align: right;" href="${pageContext.request.contextPath}/calendar">뒤로가기</a>
+	<a style="text-align: right;" href="${pageContext.request.contextPath}/memberOne">회원정보</a>
 </body>
 </html>
