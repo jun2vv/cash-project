@@ -2,23 +2,24 @@ package cash.vo;
 
 public class Cashbook {
 	private int cashbookNo;
+	private String memberId;
 	private String category;
 	private String cashbookDate;
 	private int price;
 	private String memo;
 	private String updatedate;
 	private String createdate;
-	 
+	
 	public Cashbook() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	public Cashbook(int cashbookNo, String category, String cashbookDate, int price, String memo, String updatedate,
-			String createdate) {
+	public Cashbook(int cashbookNo, String memberId, String category, String cashbookDate, int price, String memo,
+			String updatedate, String createdate) {
 		super();
 		this.cashbookNo = cashbookNo;
+		this.memberId = memberId;
 		this.category = category;
 		this.cashbookDate = cashbookDate;
 		this.price = price;
@@ -26,13 +27,21 @@ public class Cashbook {
 		this.updatedate = updatedate;
 		this.createdate = createdate;
 	}
-	
-	
+
+
+
 	public int getCashbookNo() {
 		return cashbookNo;
 	}
+	
 	public void setCashbookNo(int cashbookNo) {
 		this.cashbookNo = cashbookNo;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public String getCategory() {
 		return category;
@@ -70,13 +79,14 @@ public class Cashbook {
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
 	}
-	
-	
+
 	@Override
 	public String toString() {
-		return "Cashbook [cashbookNo=" + cashbookNo + ", category=" + category + ", cashbookDate=" + cashbookDate
-				+ ", price=" + price + ", memo=" + memo + ", updatedate=" + updatedate + ", createdate=" + createdate
-				+ "]";
+		return "Cashbook [cashbookNo=" + cashbookNo + ", memberId=" + memberId + ", category=" + category
+				+ ", cashbookDate=" + cashbookDate + ", price=" + price + ", memo=" + memo + ", updatedate="
+				+ updatedate + ", createdate=" + createdate + "]";
 	}
+	 
+	
 	
 }

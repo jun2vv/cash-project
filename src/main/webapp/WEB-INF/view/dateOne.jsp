@@ -30,5 +30,6 @@
 	</table>
 	<a style="text-align: right;" href="${pageContext.request.contextPath}/calendar">뒤로가기</a>
 	<a style="text-align: right;" href="${pageContext.request.contextPath}/memberOne">회원정보</a>
+	<a style="text-align: right;" href="${pageContext.request.contextPath}/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">추가하기</a>
 </body>
 </html>

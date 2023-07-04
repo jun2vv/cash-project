@@ -1,5 +1,7 @@
 package cash.model;
 
+import java.beans.Statement;
+import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -63,7 +65,6 @@ public class CashbookDao {
 		String sql ="SELECT cashbook_no cashbookNo, category, price, memo, updatedate, createdate\r\n"
 				+ "FROM cashbook \r\n"
 				+ "WHERE member_id = ? AND year(cashbook_date) = ? AND month(cashbook_date) = ? AND DAY(cashbook_date) = ?";
-		
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
@@ -84,7 +85,6 @@ public class CashbookDao {
 				c.setCreatedate(rs.getString("createdate"));
 				list.add(c);
 			}
-			 
 		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -92,12 +92,51 @@ public class CashbookDao {
 				rs.close();
 				stmt.close();
 				conn.close();
-				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	// 3) 반환값: cashbook_no 키값
+	public int insertCashbook(Cashbook cashbook) {
+		int cashbookNo = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql ="INSERT INTO cashbook(member_id, category, cashbook_date, price, memo, updatedate, createdate) VALUES(?, ?, ?, ?, ?, now(), now())";
+		
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, cashbook.getMemberId());
+			stmt.setString(2, cashbook.getCategory());
+			stmt.setString(3, cashbook.getCashbookDate());
+			stmt.setInt(4, cashbook.getPrice());
+			stmt.setString(5, cashbook.getMemo());
+			System.out.println(stmt + "insertCashbook DAO");
+			
+			int row = stmt.executeUpdate();
+			rs = stmt.getGeneratedKeys();
+			if(rs.next()) {
+				cashbookNo = rs.getInt(1);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
-		return list;
+		return cashbookNo;
 	}
 }
