@@ -1,6 +1,9 @@
 package cash.controller;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,9 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cash.model.CashbookDao;
+import cash.model.HashtagDao;
 import cash.vo.Cashbook;
 import cash.vo.Hashtag;
-import cash.vo.HashtagDao;
 import cash.vo.Member;
 
 @WebServlet("/addCashbook")
@@ -94,16 +97,26 @@ public class AddCashbookController extends HttpServlet {
 		memo = cashbook.getMemo();
 		String memo2 = memo.replace("#", " #"); // "#구디아카데미" -> " #구디아카데미" 이런식으로 #앞에 공백이 생기도록 바꾼다.
 		
+		Set<String> set = new HashSet<String>(); // 중복된 해시태그방지를 위해 set자료구조를 사용
+		
 		// 해시태그가 여러개라면 반복해서 입력.
-		for(String ht : memo2.split(" ")) {
-			String ht2 = ht.replace("#", ""); // #을없앤다.
-			if(ht.length() > 0) {
-				Hashtag hashtag = new Hashtag();
-				hashtag.setCashbookNo(cashbookNo);
-				hashtag.setWord(ht2);
-				hashtagRow = hashtagDao.insertHashTag(hashtag);
+		for(String ht : memo2.split(" ")) {  // issue : split된 배열을 Set으로 변경하면 중복된 내용 제거 가능
+			if (ht.startsWith("#")) {
+				String ht2 = ht.replace("#", ""); // #을없앤다.
+				if(ht.length() > 0) {
+					set.add(ht2);
+				
+				}
 			}
 		}
+		
+		for(String s : set) {
+			Hashtag hashtag = new Hashtag();
+			hashtag.setCashbookNo(cashbookNo);
+			hashtag.setWord(s);
+			hashtagRow = hashtagDao.insertHashTag(hashtag);
+		}
+		
 		if(hashtagRow > 0) {
 			System.out.println(hashtagRow + "해쉬태그 입력성공");
 			response.sendRedirect(request.getContextPath()+"/calendar");

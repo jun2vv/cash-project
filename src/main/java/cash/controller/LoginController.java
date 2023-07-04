@@ -20,11 +20,12 @@ public class LoginController extends HttpServlet {
 		// forward방식으로 
 		// 로그인이 되어있다면 cashbook으로 아니면 login으로 다시
 		
-		// alert창을 띄울 메세지 
+		// alert창을 띄울 메세지 tmxm
 		String msg = null;
 		if(request.getParameter("msg")!= null) {
 			msg = request.getParameter("msg");
 		}
+		
 		
 		System.out.println(msg + "로그인컨트롤러 msg");
 		request.setAttribute("msg", msg);

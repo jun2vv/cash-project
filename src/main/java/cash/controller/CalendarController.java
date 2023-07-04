@@ -1,8 +1,11 @@
 package cash.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cash.model.CashbookDao;
+import cash.model.HashtagDao;
 import cash.vo.Cashbook;
 import cash.vo.Member;
 
@@ -75,7 +79,11 @@ public class CalendarController extends HttpServlet {
 		// 모델을 호출(DAO 타겟 월의 수입/지출 데이터)
 		List<Cashbook> list = new CashbookDao().selectCashbookListByMonth(memberId, targetYear, targetMonth+1);
 		
-		
+		// Hashtag 호출 DAO
+		List<Map<String, Object>> htList = new ArrayList<Map<String, Object>>();
+		HashtagDao hashtagDao = new HashtagDao();
+		htList = hashtagDao.selectWordCountByMonth(memberId, targetYear, targetMonth+1);
+		System.out.println(htList.size());
 		
 		// 뷰에 값넘기기(request 속성)
 		request.setAttribute("targetYear", targetYear);
@@ -85,6 +93,7 @@ public class CalendarController extends HttpServlet {
 		request.setAttribute("beginBlank", beginBlank);
 		
 		request.setAttribute("list", list);
+		request.setAttribute("htList", htList);
 		
 		
 		// 오늘 날짜에 색상표시를 위해 현재날짜 데이터 보냄

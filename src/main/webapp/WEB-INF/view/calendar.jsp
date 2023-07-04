@@ -29,7 +29,26 @@
 		<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
 		<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
 		
+		<div>
+			<h2>이달의 해시태그</h2>
+			<div>
+				<c:forEach var="map" items="${htList}">
+					<a href="${pageContext.request.contextPath}/hashtag?targetYear=${targetYear}&targetMonth=${targetMonth}&hashtag=${map.word}">${map.word}(${map.cnt})</a>
+				</c:forEach>
+			</div>
+		</div>
+		<br>
+		
 		<table class="table table-striped">
+			<tr>
+				<th>일</th>
+				<th>월</th>
+				<th>화</th>
+				<th>수</th>
+				<th>목</th>
+				<th>금</th>
+				<th>토</th>
+			</tr>
 			<tr>
 				<!-- 0부터 totalCell-1 까지 반복 -->
 				<c:forEach var="i" begin="0" end="${totalCell-1}" step="1">
@@ -42,7 +61,7 @@
 					
 					<!-- 날짜출력  i-beginBlank+1 = 현재달의 날짜 1~30 or 1 ~31 -->
 					<c:if test="${d > 0 && d <= lastDate}">
-						<td>
+						<td style="height: 100px; width: 100px;">
 							<div><a style="color: black;" href="${pageContext.request.contextPath}/dateOne?targetDate=${d}&targetMonth=${targetMonth}&targetYear=${targetYear}">${d}</a></div>
 							<c:forEach var="c" items="${list}">
 								<!-- 날짜별 수입지출을 알기위해 년도를 날짜만 나타나게 자른다 -->

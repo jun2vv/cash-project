@@ -31,10 +31,22 @@ public class DateOneController extends HttpServlet {
 		Member member = (Member)session.getAttribute("loginMember");
 		String loginMember = member.getMemberId();
 		
+		int targetDate = 0;
+		
+		if(request.getParameter("cashbookDate") != null) {
+			targetDate = Integer.parseInt(request.getParameter("cashbookDate"));
+		} else {
+			
+			targetDate = Integer.parseInt(request.getParameter("targetDate"));
+		}
+		
+		
+		System.out.println(targetDate + "targetDateTest");
+		
 		// calendar에서 보낸 날짜 요청값 저장
 		int targetYear = Integer.parseInt(request.getParameter("targetYear"));
 		int targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
-		int targetDate = Integer.parseInt(request.getParameter("targetDate"));
+		
 		
 		// Dao호출
 		List<Cashbook> list = new CashbookDao().dateOneList(loginMember, targetYear, targetMonth+1, targetDate);
