@@ -104,6 +104,7 @@
 		</c:if>
 	</div>
 	<div>
+		<!-- 뒤로가기 -->
 		<a href="${pageContext.request.contextPath}/calendar"><img width="50" height="50" src="${pageContext.request.contextPath}/icon/back.png"></a>
 	</div>
 </body>
