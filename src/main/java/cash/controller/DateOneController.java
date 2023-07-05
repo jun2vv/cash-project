@@ -31,21 +31,37 @@ public class DateOneController extends HttpServlet {
 		Member member = (Member)session.getAttribute("loginMember");
 		String loginMember = member.getMemberId();
 		
+		int targetYear = 0;
+		int targetMonth = 0;
 		int targetDate = 0;
 		
+		// 월별 hashtag리스트에서 보내준 cashbookDate값
 		if(request.getParameter("cashbookDate") != null) {
+			targetYear = Integer.parseInt(request.getParameter("targetYear"));
+			targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
 			targetDate = Integer.parseInt(request.getParameter("cashbookDate"));
+		}
+		// 전체날짜 cashbookListByTag에서 보내준 cashbookDateByTag값
+		else if(request.getParameter("cashbookDateByTag") !=null) {
+			// 년도만 추출
+			targetYear = Integer.parseInt(request.getParameter("cashbookDateByTag").substring(0, 4));
+			// 월만 추출 자바코드로 월을 보내주는게 아닌 쿼리에서 뽑은 데이터로 보내주는거라 -1을 해줘야 한다
+			targetMonth = Integer.parseInt(request.getParameter("cashbookDateByTag").substring(5, 7)) -1;
+			// 일만 추출
+			targetDate = Integer.parseInt(request.getParameter("cashbookDateByTag").substring(8, 10));
 		} else {
-			
+			targetYear = Integer.parseInt(request.getParameter("targetYear"));
+			targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
 			targetDate = Integer.parseInt(request.getParameter("targetDate"));
 		}
 		
 		
+		System.out.println(targetYear + "targetYearTest");
+		System.out.println(targetMonth + "targetMonthTest");
 		System.out.println(targetDate + "targetDateTest");
 		
 		// calendar에서 보낸 날짜 요청값 저장
-		int targetYear = Integer.parseInt(request.getParameter("targetYear"));
-		int targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
+		
 		
 		
 		// Dao호출

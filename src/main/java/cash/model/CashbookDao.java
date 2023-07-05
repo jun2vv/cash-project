@@ -139,4 +139,85 @@ public class CashbookDao {
 		
 		return cashbookNo;
 	}
+	
+	// 4) 해시태그별 전체리스트
+	public List<Cashbook> selectCashbookListByTag(String memberId, String word, int beginRow, int rowPerPage) {
+		List<Cashbook> list = new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		String sql="SELECT c.cashbook_no cashbookNo, c.category, c.cashbook_date cashbookDate, c.price, c.memo, c.updatedate, c.createdate FROM cashbook c INNER JOIN hashtag h ON c.cashbook_no = h.cashbook_no WHERE c.member_id = ? AND h.word = ? ORDER BY c.cashbook_date DESC LIMIT ?, ?";
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberId);
+			stmt.setString(2, word);
+			stmt.setInt(3, beginRow);
+			stmt.setInt(4, rowPerPage);
+			
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Cashbook c = new Cashbook();
+				c.setCashbookNo(rs.getInt("cashbookNo"));
+				c.setCategory(rs.getString("category"));
+				c.setCashbookDate(rs.getString("cashbookDate"));
+				c.setPrice(rs.getInt("price"));
+				c.setMemo(rs.getString("memo"));
+				c.setCreatedate(rs.getString("createdate"));
+				c.setUpdatedate(rs.getString("updatedate"));
+				list.add(c);
+			}
+			System.out.println(stmt + "selectCashbookListByTag DAO");
+			System.out.println(list + "list");
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	// 4-1) 해시태그별 전체리스트의 count(*) 페이징용
+	public int selectCashbookListByTagCnt(String memberId, String word) {
+		int totalRow = 0;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql="SELECT count(*) FROM cashbook c INNER JOIN hashtag h ON c.cashbook_no = h.cashbook_no WHERE c.member_id = ? AND h.word = ? ORDER BY c.cashbook_date DESC";
+		
+		try {
+			Class.forName("org.mariadb.jdbc.Driver");
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberId);
+			stmt.setString(2, word);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				totalRow = rs.getInt(1);
+			}
+			System.out.println(totalRow + "<-- totalRow selectCashbookListByTagCnt DAO");
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+				conn.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return totalRow;
+	}
 }

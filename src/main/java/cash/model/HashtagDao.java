@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cash.vo.Cashbook;
 import cash.vo.Hashtag;
 
 public class HashtagDao {
@@ -91,7 +92,7 @@ public class HashtagDao {
 		return list;
 	}
 	
-	// 3) 해시태그별 리스트
+	// 3) 해시태그별(월별) 리스트
 	public List<Map<String, Object>> selectHashtagList(String memberId, int targetYear, int targetMonth, String hashtag) {
 		List<Map<String, Object>> list = new ArrayList<>();
 		Connection conn = null;
@@ -140,4 +141,5 @@ public class HashtagDao {
 		}
 		return list;
 	}
+	
 }

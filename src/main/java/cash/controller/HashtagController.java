@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import cash.model.HashtagDao;
 import cash.vo.Member;
 
+// 선택한월을 기준으로 해시태그별리스트
 @WebServlet("/hashtag")
 public class HashtagController extends HttpServlet {
 

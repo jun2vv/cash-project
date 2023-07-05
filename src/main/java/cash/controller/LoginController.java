@@ -26,7 +26,6 @@ public class LoginController extends HttpServlet {
 			msg = request.getParameter("msg");
 		}
 		
-		
 		System.out.println(msg + "로그인컨트롤러 msg");
 		request.setAttribute("msg", msg);
 		

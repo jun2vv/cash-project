@@ -8,10 +8,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<!-- Latest compiled and minified CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Latest compiled JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<style>
+  .hashtag-list {
+    display: none;
+  }
+  .hashtag-list.active {
+    display: block;
+  }
+</style>
 </head>
 <body>
 	<!-- 변수값or반환값 대신 EL사용 -->
@@ -28,13 +37,41 @@
 		<h1 style=" text-align: center;">${targetYear}년 ${targetMonth+1}월</h1>
 		<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
 		<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
-		
+		<script>
+		  $(document).ready(function() {
+		    $('.hashtag-toggle').click(function(e) {
+		      e.preventDefault();
+		      $(this).siblings('.hashtag-list').slideToggle();
+		    });
+		  });
+		</script>
 		<div>
-			<h2>이달의 해시태그</h2>
+		<h2>해시태그</h2>
 			<div>
-				<c:forEach var="map" items="${htList}">
-					<a href="${pageContext.request.contextPath}/hashtag?targetYear=${targetYear}&targetMonth=${targetMonth}&hashtag=${map.word}">${map.word}(${map.cnt})</a>
-				</c:forEach>
+	    		<nav>
+	      			<ul>
+	        			<li>
+				        	<a style="color: black;" href="#" class="hashtag-toggle">전체해시태그</a>
+				    			<ul class="hashtag-list">
+				           			<c:forEach var="map" items="${htList}">
+				              			<span>
+				                			<a style="color: #3f729b;" href="${pageContext.request.contextPath}/cashbookListByTag?hashtag=${map.word}">${map.word}(${map.cnt})</a>
+				              			</span>
+				            		</c:forEach>
+				          		</ul>
+				       	</li>
+				        <li>
+				          	<a style="color: black;" href="#" class="hashtag-toggle">월별해시태그</a>
+				         		<ul class="hashtag-list">
+				            		<c:forEach var="map" items="${htList}">
+				              			<span>
+				                			<a style="color: #3f729b;" href="${pageContext.request.contextPath}/hashtag?targetYear=${targetYear}&targetMonth=${targetMonth}&hashtag=${map.word}">${map.word}(${map.cnt})</a>
+				              			</span>
+				            		</c:forEach>
+				          		</ul>
+				      	</li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 		<br>
