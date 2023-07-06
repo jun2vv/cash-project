@@ -17,6 +17,7 @@ import cash.vo.Member;
 public class LoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass()+", "+request.getRequestURL());
 		// session 유효성검사 LogOffFilter에서 처리
 		
 		// forward방식으로 
@@ -35,6 +36,8 @@ public class LoginController extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass()+", "+request.getRequestURL()+"doPost");
+		
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");
 		

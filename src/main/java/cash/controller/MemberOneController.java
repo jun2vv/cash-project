@@ -16,6 +16,7 @@ public class MemberOneController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass()+", "+request.getRequestURL());
 		// session유효성검사 onFilter에서 처리
 		
 		HttpSession session = request.getSession();

@@ -17,6 +17,7 @@ import cash.vo.Member;
 public class ModifyMemberController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass()+", "+request.getRequestURL());
 		// session 유효성 검사 onFilter에서 처리
 		
 		// view에서 온 msg변수 유효성검사 후 저장

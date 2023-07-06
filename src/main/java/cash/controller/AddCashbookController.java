@@ -23,6 +23,7 @@ public class AddCashbookController extends HttpServlet {
 	@Override
 	// 입력폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass()+", "+request.getRequestURL());
 		// session 유효성 검사 Filter에서 처리
 		
 		HttpSession session = request.getSession();
@@ -50,7 +51,7 @@ public class AddCashbookController extends HttpServlet {
 	// 입력 액션
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		System.out.println(this.getClass()+", "+request.getRequestURL()+"doPost");
 		
 		HttpSession session = request.getSession();
 		Member member = (Member)session.getAttribute("loginMember");

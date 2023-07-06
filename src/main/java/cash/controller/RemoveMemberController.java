@@ -18,6 +18,7 @@ public class RemoveMemberController extends HttpServlet {
        
 	// 비밀번호 입력폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass()+", "+request.getRequestURL());
 		// session유효성검사 onFilter에서 처리
 		
 		request.getRequestDispatcher("/WEB-INF/view/removeMember.jsp").forward(request, response);
@@ -26,6 +27,7 @@ public class RemoveMemberController extends HttpServlet {
 
 	// 탈퇴
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass()+", "+request.getRequestURL()+"doPost");
 		// session객체생성
 		HttpSession session = request.getSession();
 		

@@ -34,10 +34,11 @@ public class LoginOnFilter extends HttpFilter implements Filter {
 			return;
 			
 		}
-		System.out.println("/on/*후");
 		
 		// 로그인 되어 있으면 실행
 		chain.doFilter(request, response);
+		
+		System.out.println("/on/*후");
 	}
 
 }

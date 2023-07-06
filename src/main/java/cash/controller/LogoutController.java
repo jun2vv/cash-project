@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 public class LogoutController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		System.out.println(this.getClass()+", "+request.getRequestURL());
 		HttpSession session = request.getSession();
 		session.invalidate();
 		

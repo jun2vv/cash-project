@@ -35,8 +35,8 @@
 	<div class="container">
 		<a style="text-align: right;" href="${pageContext.request.contextPath}/on/cashbook">뒤로가기</a>
 		<h1 style=" text-align: center;">${targetYear}년 ${targetMonth+1}월</h1>
-		<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
-		<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
+		<a href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
+		<a href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
 		<script>
 		  $(document).ready(function() {
 		    $('.hashtag-toggle').click(function(e) {

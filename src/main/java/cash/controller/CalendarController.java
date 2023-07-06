@@ -24,6 +24,7 @@ public class CalendarController extends HttpServlet {
        
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass()+", "+request.getRequestURL());
 		// session 유효성검사 onFilter에서처리
 		HttpSession session = request.getSession();
 		

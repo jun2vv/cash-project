@@ -20,6 +20,8 @@ import cash.vo.Member;
 public class DateOneController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass()+", "+request.getRequestURL());
+		
 		// session 유효성 onFilter에서 처리
 		HttpSession session = request.getSession();
 		
@@ -72,7 +74,5 @@ public class DateOneController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/view/dateOne.jsp").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
 
 }

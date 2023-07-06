@@ -36,9 +36,9 @@ public class LogOffFilter extends HttpFilter implements Filter {
 			
 		}
 		
+		chain.doFilter(request, response);
 		System.out.println("/off/*후");
 		
-		chain.doFilter(request, response);
 	}
 
 }

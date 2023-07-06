@@ -20,6 +20,7 @@ import cash.vo.Member;
 public class CashbookListController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass()+", "+request.getRequestURL());
 		// session 유효성 onFilter에서 처리
 		HttpSession session = request.getSession();
 		

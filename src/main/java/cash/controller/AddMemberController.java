@@ -16,10 +16,11 @@ import cash.vo.Member;
 
 @WebServlet("/off/addMember")
 public class AddMemberController extends HttpServlet {
-
+	
 	// 회원가입폼
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(this.getClass()+", "+request.getRequestURL());
 		// session 유효검사 offFilter에서 처리
 		
 		// jsp페이지로 포워드(디스패치)
@@ -31,7 +32,7 @@ public class AddMemberController extends HttpServlet {
 	// 회원가입 액션
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println(this.getClass()+", "+request.getRequestURL()+"doPost");
 		/*
 		// 요청값
 		if(request.getParameter("memberId") == null
