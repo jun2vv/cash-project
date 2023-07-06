@@ -51,7 +51,7 @@
 									request.getContextPath() 요놈은
 									${pageContext.request.contextPath} 이렇게 EL안에서 쓸수있다.   
 								-->
-	<form id="loginForm" method="post" action="${pageContext.request.contextPath}/login">
+	<form id="loginForm" method="post" action="${pageContext.request.contextPath}/off/login">
 		<table border="1">
 			<tr>
 				<td>id</td>

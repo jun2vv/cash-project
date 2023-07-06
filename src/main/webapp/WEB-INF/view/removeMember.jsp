@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>회원탈퇴</h1>
-	<form method="post" action="${pageContext.request.contextPath}/removeMember">
+	<form method="post" action="${pageContext.request.contextPath}/on/removeMember">
 		<table>
 			<tr>
 				<td>비밀번호를 입력해주세요</td>

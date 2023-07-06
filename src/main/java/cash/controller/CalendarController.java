@@ -19,17 +19,14 @@ import cash.model.HashtagDao;
 import cash.vo.Cashbook;
 import cash.vo.Member;
 
-@WebServlet("/calendar")
+@WebServlet("/on/calendar")
 public class CalendarController extends HttpServlet {
        
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session 검증 코드
+		// session 유효성검사 onFilter에서처리
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
+		
 		// 세션아이디값 변수저장
 		Member loginMember = (Member)(session.getAttribute("loginMember"));
 		String memberId = loginMember.getMemberId();

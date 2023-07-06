@@ -13,10 +13,12 @@ import javax.websocket.Session;
 import cash.model.MemberDao;
 import cash.vo.Member;
 
-@WebServlet("/login")
+@WebServlet("/off/login")
 public class LoginController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// session 유효성검사 LogOffFilter에서 처리
+		
 		// forward방식으로 
 		// 로그인이 되어있다면 cashbook으로 아니면 login으로 다시
 		
@@ -28,13 +30,6 @@ public class LoginController extends HttpServlet {
 		
 		System.out.println(msg + "로그인컨트롤러 msg");
 		request.setAttribute("msg", msg);
-		
-		// session 유효성검사
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loignMember") != null) {
-			response.sendRedirect(request.getContextPath()+"/cashbook");
-			return;
-		}
 		 
 		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 	}
@@ -54,14 +49,14 @@ public class LoginController extends HttpServlet {
 		
 		if(loginMember == null) {
 			System.out.println("로그인실패");
-			response.sendRedirect(request.getContextPath()+"/login");
+			response.sendRedirect(request.getContextPath()+"/off/login");
 			return;
 		} 
 			// 로그인 성공시 session사용
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", loginMember);
 			System.out.println("로그인성공");
-			response.sendRedirect(request.getContextPath()+"/cashbook");
+			response.sendRedirect(request.getContextPath()+"/on/cashbook");
 	}
 
 }

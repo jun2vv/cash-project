@@ -64,7 +64,7 @@
 			<c:forEach var="map" items="${list}" >
 				<tr>
 					<td>
-						<a href="${pageContext.request.contextPath}/dateOne?cashbookDate=${map.cashbookDate}&targetYear=${targetYear}&targetMonth=${targetMonth}">
+						<a href="${pageContext.request.contextPath}/on/dateOne?cashbookDate=${map.cashbookDate}&targetYear=${targetYear}&targetMonth=${targetMonth}">
 							${map.cashbookNo}
 						</a>
 					</td>
@@ -77,6 +77,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<a href="${pageContext.request.contextPath}/calendar"><img width="50" height="50" src="${pageContext.request.contextPath}/icon/back.png"></a>
+	<a href="${pageContext.request.contextPath}/on/calendar"><img width="50" height="50" src="${pageContext.request.contextPath}/icon/back.png"></a>
 </body>
 </html>

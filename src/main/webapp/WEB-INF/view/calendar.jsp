@@ -33,7 +33,7 @@
 	<!-- 자바코드(제어문) if,for문 대신 JSTL 사용 -->
 	
 	<div class="container">
-		<a style="text-align: right;" href="${pageContext.request.contextPath}/cashbook">뒤로가기</a>
+		<a style="text-align: right;" href="${pageContext.request.contextPath}/on/cashbook">뒤로가기</a>
 		<h1 style=" text-align: center;">${targetYear}년 ${targetMonth+1}월</h1>
 		<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
 		<a href="${pageContext.request.contextPath}/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
@@ -55,7 +55,7 @@
 				    			<ul class="hashtag-list">
 				           			<c:forEach var="map" items="${htList}">
 				              			<span>
-				                			<a style="color: #3f729b;" href="${pageContext.request.contextPath}/cashbookListByTag?hashtag=${map.word}">${map.word}(${map.cnt})</a>
+				                			<a style="color: #3f729b;" href="${pageContext.request.contextPath}/on/cashbookListByTag?hashtag=${map.word}">${map.word}(${map.cnt})</a>
 				              			</span>
 				            		</c:forEach>
 				          		</ul>
@@ -65,7 +65,7 @@
 				         		<ul class="hashtag-list">
 				            		<c:forEach var="map" items="${htList}">
 				              			<span>
-				                			<a style="color: #3f729b;" href="${pageContext.request.contextPath}/hashtag?targetYear=${targetYear}&targetMonth=${targetMonth}&hashtag=${map.word}">${map.word}(${map.cnt})</a>
+				                			<a style="color: #3f729b;" href="${pageContext.request.contextPath}/on/hashtag?targetYear=${targetYear}&targetMonth=${targetMonth}&hashtag=${map.word}">${map.word}(${map.cnt})</a>
 				              			</span>
 				            		</c:forEach>
 				          		</ul>
@@ -99,7 +99,7 @@
 					<!-- 날짜출력  i-beginBlank+1 = 현재달의 날짜 1~30 or 1 ~31 -->
 					<c:if test="${d > 0 && d <= lastDate}">
 						<td style="height: 100px; width: 100px;">
-							<div><a style="color: black;" href="${pageContext.request.contextPath}/dateOne?targetDate=${d}&targetMonth=${targetMonth}&targetYear=${targetYear}">${d}</a></div>
+							<div><a style="color: black;" href="${pageContext.request.contextPath}/on/dateOne?targetDate=${d}&targetMonth=${targetMonth}&targetYear=${targetYear}">${d}</a></div>
 							<c:forEach var="c" items="${list}">
 								<!-- 날짜별 수입지출을 알기위해 년도를 날짜만 나타나게 자른다 -->
 								<c:if test="${d == fn:substring(c.cashbookDate,8,10)}">

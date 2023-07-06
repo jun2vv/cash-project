@@ -16,16 +16,12 @@ import cash.vo.Cashbook;
 import cash.vo.Member;
 
 // 전체날짜를 기준으로 해시태그별 리스트
-@WebServlet("/cashbookListByTag")
+@WebServlet("/on/cashbookListByTag")
 public class CashbookListController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session 유효성
+		// session 유효성 onFilter에서 처리
 		HttpSession session = request.getSession();
-		
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-		}
 		
 		// session에서 아이디값 받기
 		Member member = (Member)session.getAttribute("loginMember");

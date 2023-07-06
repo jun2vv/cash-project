@@ -34,7 +34,7 @@
 </head>
 <body>
 	<h1>회원가입</h1>
-	<form id="addMemberForm" method="post" action="${pageContext.request.contextPath}/addMember">
+	<form id="addMemberForm" method="post" action="${pageContext.request.contextPath}/on/addMember">
 		<table>
 			<tr>
 				<td>아이디</td>

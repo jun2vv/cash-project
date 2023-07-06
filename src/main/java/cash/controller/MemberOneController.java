@@ -11,12 +11,13 @@ import javax.servlet.http.HttpSession;
 import cash.model.MemberDao;
 import cash.vo.Member;
 
-@WebServlet("/memberOne")
+@WebServlet("/on/memberOne")
 public class MemberOneController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session유효성검사
+		// session유효성검사 onFilter에서 처리
+		
 		HttpSession session = request.getSession();
 		
 		// msg값 요청값 검사 후 저장
@@ -27,11 +28,6 @@ public class MemberOneController extends HttpServlet {
 		
 		System.out.println(msg + "회원정보컨트롤러 msg");
 		request.setAttribute("msg", msg);
-		
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		} 
 		
 		Member loginMember = (Member)(session.getAttribute("loginMember"));
 		

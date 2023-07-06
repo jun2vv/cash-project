@@ -56,7 +56,7 @@
 	%>
 
 	<h1>회원정보수정</h1>
-	<form id="modifyMemberForm" method="post" action="${pageContext.request.contextPath}/modifyMember">
+	<form id="modifyMemberForm" method="post" action="${pageContext.request.contextPath}/on/modifyMember">
 	<table>
 		<tr>
 			<td>기존 비밀번호</td>

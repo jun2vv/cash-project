@@ -74,9 +74,9 @@
 		</tbody>
 	</table>
 	<!-- 뒤로가기 -->
-	<a href="${pageContext.request.contextPath}/calendar"><img width="50" height="50" src="${pageContext.request.contextPath}/icon/back.png"></a>
+	<a href="${pageContext.request.contextPath}/on/calendar"><img width="50" height="50" src="${pageContext.request.contextPath}/icon/back.png"></a>
 	
-	<a style="text-align: right;" href="${pageContext.request.contextPath}/memberOne">회원정보</a>
-	<a style="text-align: right;" href="${pageContext.request.contextPath}/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">추가하기</a>
+	<a style="text-align: right;" href="${pageContext.request.contextPath}/on/memberOne">회원정보</a>
+	<a style="text-align: right;" href="${pageContext.request.contextPath}/on/addCashbook?targetYear=${targetYear}&targetMonth=${targetMonth}&targetDate=${targetDate}">추가하기</a>
 </body>
 </html>

@@ -13,10 +13,12 @@ import javax.servlet.http.HttpSession;
 import cash.model.MemberDao;
 import cash.vo.Member;
 
-@WebServlet("/modifyMember")
+@WebServlet("/on/modifyMember")
 public class ModifyMemberController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// session 유효성 검사 onFilter에서 처리
+		
 		// view에서 온 msg변수 유효성검사 후 저장
 		String msg = null;
 		if(request.getParameter("msg") != null) {
@@ -51,13 +53,13 @@ public class ModifyMemberController extends HttpServlet {
 			msg = "정보수정에 성공하였습니다";
 			System.out.println("정보수정완료");
 			System.out.println(row);
-			response.sendRedirect(request.getContextPath()+"/memberOne?msg=" +  URLEncoder.encode(msg, "UTF-8"));
+			response.sendRedirect(request.getContextPath()+"/on/memberOne?msg=" +  URLEncoder.encode(msg, "UTF-8"));
 			
 		} else {
 			msg = "정보수정을 실패하였습니다";
 			System.out.println("정보수정실패");
 			System.out.println(row);
-			response.sendRedirect(request.getContextPath()+"/modifyMember?msg=" +  URLEncoder.encode(msg, "UTF-8"));
+			response.sendRedirect(request.getContextPath()+"/on/modifyMember?msg=" +  URLEncoder.encode(msg, "UTF-8"));
 		}
 		
 	}

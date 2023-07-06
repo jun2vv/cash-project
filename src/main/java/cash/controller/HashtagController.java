@@ -16,16 +16,14 @@ import cash.model.HashtagDao;
 import cash.vo.Member;
 
 // 선택한월을 기준으로 해시태그별리스트
-@WebServlet("/hashtag")
+@WebServlet("/on/hashtag")
 public class HashtagController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session 검증 코드
+		// session 검증 코드 onFilter에서 처리
+		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
+		
 		// session에서 받아온 로그인값 변수선언
 		Member member = (Member)session.getAttribute("loginMember");
 		String memberId = member.getMemberId();

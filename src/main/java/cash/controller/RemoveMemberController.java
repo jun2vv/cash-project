@@ -13,11 +13,12 @@ import javax.servlet.http.HttpSession;
 import cash.model.MemberDao;
 import cash.vo.Member;
 
-@WebServlet("/removeMember")
+@WebServlet("/on/removeMember")
 public class RemoveMemberController extends HttpServlet {
        
 	// 비밀번호 입력폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// session유효성검사 onFilter에서 처리
 		
 		request.getRequestDispatcher("/WEB-INF/view/removeMember.jsp").forward(request, response);
 		
@@ -43,12 +44,12 @@ public class RemoveMemberController extends HttpServlet {
 			// 탈퇴 성공시 
 			session.invalidate();
 			msg = "회원탈퇴 성공";
-			response.sendRedirect(request.getContextPath()+"/login?msg="+ URLEncoder.encode(msg, "UTF-8"));
+			response.sendRedirect(request.getContextPath()+"/off/login?msg="+ URLEncoder.encode(msg, "UTF-8"));
 			
 		} else {
 			msg = "회원탈퇴 실패";
 			System.out.println("회원탈퇴 실패");
-			response.sendRedirect(request.getContextPath()+"/memberOne?msg="+ URLEncoder.encode(msg, "UTF-8"));
+			response.sendRedirect(request.getContextPath()+"/on/memberOne?msg="+ URLEncoder.encode(msg, "UTF-8"));
 			
 		}
 		

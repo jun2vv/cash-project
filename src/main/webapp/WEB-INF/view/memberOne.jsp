@@ -38,9 +38,9 @@
 			<td>: ${member.updatedate}</td>
 		</tr>
 	</table>
-	<a href = "${pageContext.request.contextPath}/modifyMember"> 회원정보수정</a>
-	<a href="${pageContext.request.contextPath}/removeMember">회원탈퇴</a>
-	<a href="${pageContext.request.contextPath}/cashbook">뒤로가기</a>
-	<a href="${pageContext.request.contextPath}/calendar">가계부</a>
+	<a href = "${pageContext.request.contextPath}/on/modifyMember"> 회원정보수정</a>
+	<a href="${pageContext.request.contextPath}/on/removeMember">회원탈퇴</a>
+	<a href="${pageContext.request.contextPath}/on/cashbook">뒤로가기</a>
+	<a href="${pageContext.request.contextPath}/on/calendar">가계부</a>
 </body>
 </html>

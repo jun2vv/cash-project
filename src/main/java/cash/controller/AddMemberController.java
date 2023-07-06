@@ -14,18 +14,13 @@ import cash.model.MemberDao;
 import cash.vo.Member;
 
 
-@WebServlet("/addMember")
+@WebServlet("/off/addMember")
 public class AddMemberController extends HttpServlet {
 
 	// 회원가입폼
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session 유효검사(null)일때
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loignMember") != null) {
-			response.sendRedirect(request.getContextPath()+"/cashbook");
-			return;
-		}
+		// session 유효검사 offFilter에서 처리
 		
 		// jsp페이지로 포워드(디스패치)
 		request.getRequestDispatcher("/WEB-INF/view/addMember.jsp").forward(request, response);
@@ -68,14 +63,14 @@ public class AddMemberController extends HttpServlet {
 			msg = "회원가입 되었습니다!";
 			System.out.println("회원가입 성공");
 			System.out.println(row + "row");
-			response.sendRedirect(request.getContextPath()+"/login?msg=" + URLEncoder.encode(msg, "UTF-8"));
+			response.sendRedirect(request.getContextPath()+"/off/login?msg=" + URLEncoder.encode(msg, "UTF-8"));
 			
 		// 회원가입 실패시	
 		} else if (row == 0){ 
 			msg = "회원가입에 실패하였습니다!";
 			System.out.println("회원가입 실패");
 			System.out.println(row + "row");
-			response.sendRedirect(request.getContextPath()+"/addMember?msg=" + URLEncoder.encode(msg, "UTF-8"));
+			response.sendRedirect(request.getContextPath()+"/off/addMember?msg=" + URLEncoder.encode(msg, "UTF-8"));
 		} else {
 			System.out.println("에러!");
 			System.out.println(row + "row");

@@ -38,7 +38,7 @@
 </head>
 <body>
 	<h1>추가 날짜${targetYear}년${targetMonth+1}월${targetDate}일</h1>
-	<form id="addCashbookForm" action="${pageContext.request.contextPath}/addCashbook" method="post">
+	<form id="addCashbookForm" action="${pageContext.request.contextPath}/on/addCashbook" method="post">
 		<input type="hidden" name="date" value="${targetYear}-${targetMonth+1}-${targetDate}">
 		<table>
 			<tr>

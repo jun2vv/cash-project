@@ -8,15 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/cashbook")
+@WebServlet("/on/cashbook")
 public class CashbookController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		if(session.getAttribute("loignMember") != null) {
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
+		// session 유효성 검사 onFilter에서처리
 		
 		// 이번달 달력에 가계부목록의 모델값을 셋팅
 		

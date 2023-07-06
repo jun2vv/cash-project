@@ -17,19 +17,16 @@ import cash.vo.Cashbook;
 import cash.vo.Hashtag;
 import cash.vo.Member;
 
-@WebServlet("/addCashbook")
+@WebServlet("/on/addCashbook")
 public class AddCashbookController extends HttpServlet {
        
 	@Override
 	// 입력폼
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// session 유효성 검사
+		// session 유효성 검사 Filter에서 처리
+		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("loginMember") == null) {
-			
-			response.sendRedirect(request.getContextPath()+"/login");
-			return;
-		}
+		
 		Member member = (Member)session.getAttribute("loginMember");
 		String loginMember = member.getMemberId();
 		
@@ -80,7 +77,7 @@ public class AddCashbookController extends HttpServlet {
 		// 입력성공시 1반환
 		if(cashbookNo == 0) {
 			System.out.println(cashbookNo + "입력실패");
-			response.sendRedirect(request.getContextPath()+"/calendar");
+			response.sendRedirect(request.getContextPath()+"/on/calendar");
 			return;
 			
 		}
@@ -119,11 +116,11 @@ public class AddCashbookController extends HttpServlet {
 		
 		if(hashtagRow > 0) {
 			System.out.println(hashtagRow + "해쉬태그 입력성공");
-			response.sendRedirect(request.getContextPath()+"/calendar");
+			response.sendRedirect(request.getContextPath()+"/on/calendar");
 			return;
 		}
 			System.out.println(hashtagRow + "해쉬태그 입력실패");
-		response.sendRedirect(request.getContextPath()+"/calendar");
+		response.sendRedirect(request.getContextPath()+"/on/calendar");
 	}
 
 }
