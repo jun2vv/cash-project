@@ -42,7 +42,7 @@
 		    $('.hashtag-toggle').click(function(e) {
 		      e.preventDefault();
 		      $(this).siblings('.hashtag-list').slideToggle();
-		    });
+		    });dmdj
 		  });
 		</script>
 		<div>

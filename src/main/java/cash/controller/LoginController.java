@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,11 +20,23 @@ public class LoginController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(this.getClass()+", "+request.getRequestURL());
 		// session 유효성검사 LogOffFilter에서 처리
-		
-		// forward방식으로 
 		// 로그인이 되어있다면 cashbook으로 아니면 login으로 다시
 		
-		// alert창을 띄울 메세지 tmxm
+		// 쿠키에 저장된 로그인성공된 아이디가 있다면 request속성에 저장해서 view에서 value로 출력 
+		Cookie[] cookies = request.getCookies(); // getCookies메서드를 통하여 모든 쿠키값을 배열에 저장
+		
+		if(cookies != null) {
+			for(Cookie c : cookies) {
+				if(c.getName().equals("cookieLoginId") == true) {
+					// request.setAttribute에다가 찾은 쿠키값 저장
+					request.setAttribute("cookieId", c.getValue());
+					System.out.println(request.getAttribute("cookieId") + ": 저장한 cookieId");
+				}
+			}
+		}
+		
+		
+		// alert창을 띄울 메세지 
 		String msg = null;
 		if(request.getParameter("msg")!= null) {
 			msg = request.getParameter("msg");
@@ -32,6 +45,8 @@ public class LoginController extends HttpServlet {
 		System.out.println(msg + "로그인컨트롤러 msg");
 		request.setAttribute("msg", msg);
 		 
+		
+		
 		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 	}
 	@Override
@@ -48,16 +63,27 @@ public class LoginController extends HttpServlet {
 		
 		MemberDao memberDao = new MemberDao();
 		Member  loginMember = memberDao.selectMemberById(member);
+		// 아이디값 변수선언해서 사용
+		String loginId = loginMember.getMemberId();
+		
 		// null 로그인실패
 		
-		if(loginMember == null) {
+		if(loginId == null) {
 			System.out.println("로그인실패");
 			response.sendRedirect(request.getContextPath()+"/off/login");
 			return;
 		} 
 			// 로그인 성공시 session사용
 			HttpSession session = request.getSession();
-			session.setAttribute("loginMember", loginMember);
+			session.setAttribute("loginMember", loginId);
+			
+			// idSave 체크박스 값이 넘어왔다면 쿠키에 아이디값저장
+			if(request.getParameter("idSave") != null) {
+				Cookie loginIdCookie = new Cookie("cookieLoginId", loginId);
+				// 클라이언트한테 쿠키 전송
+				response.addCookie(loginIdCookie);
+			}
+			
 			System.out.println("로그인성공");
 			response.sendRedirect(request.getContextPath()+"/on/cashbook");
 	}

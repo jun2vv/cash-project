@@ -83,7 +83,7 @@ public class CalendarController extends HttpServlet {
 		htList = hashtagDao.selectWordCountByMonth(memberId, targetYear, targetMonth+1);
 		System.out.println(htList.size());
 		
-		// 뷰에 값넘기기(request 속성)
+		// (HttpServletRequest request 안에 값 저장해서 사용)
 		request.setAttribute("targetYear", targetYear);
 		request.setAttribute("targetMonth", targetMonth);
 		request.setAttribute("lastDate", lastDate);

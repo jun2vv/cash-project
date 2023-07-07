@@ -21,7 +21,6 @@ public class HashtagDao {
 		String sql ="INSERT INTO hashtag(cashbook_no, word, updatedate, createdate) VALUES(?, ?, now(), now())";
 		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, hashtag.getCashbookNo());
@@ -61,7 +60,6 @@ public class HashtagDao {
 				+ " ORDER BY COUNT(*) DESC";
 		
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, memberId);
@@ -105,7 +103,6 @@ public class HashtagDao {
 				+ "WHERE c.member_id = ? AND year(c.cashbook_date) = ? AND MONTH(c.cashbook_date) = ? AND h.word = ?\r\n"
 				+ "ORDER BY c.createdate DESC;";
 		try {
-			Class.forName("org.mariadb.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, memberId);

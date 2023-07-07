@@ -56,7 +56,7 @@
 			<tr>
 				<td>id</td>
 				<td>
-					<input id="loginId" type="text" name="memberId">
+					<input id="loginId" type="text" name="memberId" value="${cookieId}">
 					<span id="loginIdMsg" class="msg"></span>
 				</td>
 			</tr>
@@ -65,6 +65,11 @@
 				<td>
 					<input id="loginPw" type="password" name="memberPw">
 					<span id="loginPwMsg" class="msg"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" name="idSave" value="y">id저장
 				</td>
 			</tr>
 		</table>

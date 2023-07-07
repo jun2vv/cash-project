@@ -1,4 +1,4 @@
-package filter;
+package cash.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -14,31 +14,31 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * 로그인 안되어 있을때 지나가는 필터
+ * 로그인이 되어 있을때만 필터지나침
  */
-@WebFilter("/off/*")
-public class LogOffFilter extends HttpFilter implements Filter {
+@WebFilter("/on/*")
+public class LoginOnFilter extends HttpFilter implements Filter {
        
-
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("/off/*전");
+		System.out.println("/on/*전");
 		
 		// 부모타입이 자식타입의 메서드를 사용할 수 없으니 다운캐스팅시킨다
 		HttpServletRequest req = (HttpServletRequest)request;
 		// 세션값을 받아오기 위해 세션객체 생성
 		HttpSession session = req.getSession();
 		
-		// 로그인이 되어 있지않을때 지나가는 필터이므로 로그인 되어있으면 calendar컨트롤러로 보냄
-		if(session.getAttribute("loginMember") != null) {
+		// 로그인 되어 있을때 지나가는 필터이므로 로그인 안되어있으면 login컨트롤러로 보냄
+		if(session.getAttribute("loginMember") == null) {
 			HttpServletResponse rep = (HttpServletResponse)response;
-			rep.sendRedirect(req.getContextPath()+"/cashbook");
+			rep.sendRedirect(req.getContextPath()+"/login");
 			return;
 			
 		}
 		
+		// 로그인 되어 있으면 실행
 		chain.doFilter(request, response);
-		System.out.println("/off/*후");
 		
+		System.out.println("/on/*후");
 	}
 
 }
