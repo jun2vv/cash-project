@@ -44,7 +44,7 @@ public class AddCashbookController extends HttpServlet {
 		request.setAttribute("targetDate", targetDate);
 		
 		// 포워드방식으로 보냄
-		request.getRequestDispatcher("WEB-INF/view/addCashbook.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/view/addCashbook.jsp").forward(request, response);
 	}
 	
 	// 입력 액션
