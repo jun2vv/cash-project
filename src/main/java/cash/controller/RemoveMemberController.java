@@ -32,13 +32,13 @@ public class RemoveMemberController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// 세션아이디값 변수저장
-		Member loginMember = (Member)(session.getAttribute("loginMember"));
+		String loginMember = (String)(session.getAttribute("loginMember"));
 		// 요청값 저장
 		String memberPw = request.getParameter("memberPw");
 		
 		// dao호출
 		MemberDao memberDao = new MemberDao();
-		int row = memberDao.removeMember(loginMember.getMemberId(), memberPw);
+		int row = memberDao.removeMember(loginMember, memberPw);
 		
 		String msg = null;
 		if(row > 0) {

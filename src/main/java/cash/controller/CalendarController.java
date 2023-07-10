@@ -29,9 +29,10 @@ public class CalendarController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// 세션아이디값 변수저장
-		Member loginMember = (Member)(session.getAttribute("loginMember"));
-		String memberId = loginMember.getMemberId();
-		System.out.println(memberId + ": 현재로그인 아이디");
+		String loginMember = (String)(session.getAttribute("loginMember"));
+		
+		
+		System.out.println(loginMember + ": 현재로그인 아이디");
 		
 		// view에 넘겨줄 달력정보(달력모델값)
 		Calendar firstDay = Calendar.getInstance(); // 오늘 날짜
@@ -75,12 +76,12 @@ public class CalendarController extends HttpServlet {
 		System.out.println(totalCell + "totalCell");
 		
 		// 모델을 호출(DAO 타겟 월의 수입/지출 데이터)
-		List<Cashbook> list = new CashbookDao().selectCashbookListByMonth(memberId, targetYear, targetMonth+1);
+		List<Cashbook> list = new CashbookDao().selectCashbookListByMonth(loginMember, targetYear, targetMonth+1);
 		
 		// Hashtag 호출 DAO
 		List<Map<String, Object>> htList = new ArrayList<Map<String, Object>>();
 		HashtagDao hashtagDao = new HashtagDao();
-		htList = hashtagDao.selectWordCountByMonth(memberId, targetYear, targetMonth+1);
+		htList = hashtagDao.selectWordCountByMonth(loginMember, targetYear, targetMonth+1);
 		System.out.println(htList.size());
 		
 		// (HttpServletRequest request 안에 값 저장해서 사용)

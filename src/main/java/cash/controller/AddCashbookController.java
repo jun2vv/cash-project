@@ -28,8 +28,7 @@ public class AddCashbookController extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		
-		Member member = (Member)session.getAttribute("loginMember");
-		String loginMember = member.getMemberId();
+		String loginMember = (String)session.getAttribute("loginMember");
 		
 		// request 요청값 
 		int targetYear = Integer.parseInt(request.getParameter("targetYear"));
@@ -54,8 +53,7 @@ public class AddCashbookController extends HttpServlet {
 		System.out.println(this.getClass()+", "+request.getRequestURL()+"doPost");
 		
 		HttpSession session = request.getSession();
-		Member member = (Member)session.getAttribute("loginMember");
-		String loginMember = member.getMemberId();
+		String loginMember = (String)session.getAttribute("loginMember");
 		
 		// 데이터 입력 요청값 
 		String date = request.getParameter("date");

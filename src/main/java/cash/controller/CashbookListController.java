@@ -25,8 +25,7 @@ public class CashbookListController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// session에서 아이디값 받기
-		Member member = (Member)session.getAttribute("loginMember");
-		String memberId = member.getMemberId();
+		String loginMember = (String)session.getAttribute("loginMember");
 		// 해시태그 요청값 받기
 		String hashtag = request.getParameter("hashtag");
 		
@@ -47,7 +46,7 @@ public class CashbookListController extends HttpServlet {
 		int beginRow = (currentPage-1) * rowPerPage;
 		
 		// 전체 행번호 호출
-		int totalRow = cashbookDao.selectCashbookListByTagCnt(memberId, hashtag);
+		int totalRow = cashbookDao.selectCashbookListByTagCnt(loginMember, hashtag);
 		
 		int lastPage = totalRow / rowPerPage;
 		//rowPerPage가 딱 나뉘어 떨어지지 않으면 그 여분을 보여주기 위해 +1
@@ -71,7 +70,7 @@ public class CashbookListController extends HttpServlet {
 		// ----------페이징 끝-------------
 		
 		List<Cashbook> list = new ArrayList<>();
-		list = cashbookDao.selectCashbookListByTag(memberId, hashtag, beginRow, rowPerPage);
+		list = cashbookDao.selectCashbookListByTag(loginMember, hashtag, beginRow, rowPerPage);
 		
 		// 변수값들을 요청 객체에 저장
 		// 페이징변수

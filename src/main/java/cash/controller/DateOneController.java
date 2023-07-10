@@ -26,9 +26,7 @@ public class DateOneController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// session 로그인값 받은후 변수 저장
-		Member member = (Member)session.getAttribute("loginMember");
-		String loginMember = member.getMemberId();
-		
+		String loginMember = (String)session.getAttribute("loginMember");
 		int targetYear = 0;
 		int targetMonth = 0;
 		int targetDate = 0;

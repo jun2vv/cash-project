@@ -60,15 +60,15 @@ public class LoginController extends HttpServlet {
 		System.out.println(memberPw + "<-- LoginController memberPw");
 		
 		Member member = new Member(memberId, memberPw, null, null);
+		String loginId = (String)member.getMemberId();
+		System.out.println(loginId +"login Id");
 		
 		MemberDao memberDao = new MemberDao();
-		Member  loginMember = memberDao.selectMemberById(member);
-		// 아이디값 변수선언해서 사용
-		String loginId = loginMember.getMemberId();
+		Member loginMember = memberDao.selectMemberById(member);
 		
 		// null 로그인실패
 		
-		if(loginId == null) {
+		if(loginMember == null) {
 			System.out.println("로그인실패");
 			response.sendRedirect(request.getContextPath()+"/off/login");
 			return;
@@ -79,7 +79,7 @@ public class LoginController extends HttpServlet {
 			
 			// idSave 체크박스 값이 넘어왔다면 쿠키에 아이디값저장
 			if(request.getParameter("idSave") != null) {
-				Cookie loginIdCookie = new Cookie("cookieLoginId", loginId);
+				Cookie loginIdCookie = new Cookie("cookieLoginId",loginId);
 				// 클라이언트한테 쿠키 전송
 				response.addCookie(loginIdCookie);
 			}

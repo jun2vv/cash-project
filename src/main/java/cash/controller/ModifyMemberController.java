@@ -35,7 +35,7 @@ public class ModifyMemberController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// session 로그인 값 저장
 		HttpSession session = request.getSession();
-		Member loginMember = (Member)session.getAttribute("loginMember");
+		String loginMember = (String)session.getAttribute("loginMember");
 		
 		// 요청값 저장
 		String memberPw = request.getParameter("memberPw");
@@ -45,7 +45,7 @@ public class ModifyMemberController extends HttpServlet {
 		// dao 호출
 		MemberDao memberDao = new MemberDao();
 		
-		Member member = new Member(loginMember.getMemberId(), memberPw, null, null);
+		Member member = new Member(loginMember, memberPw, null, null);
 		
 		int row = memberDao.modifyMember(member, modifyPw, modifyPw2);
 		

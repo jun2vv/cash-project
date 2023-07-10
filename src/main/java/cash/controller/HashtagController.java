@@ -26,8 +26,7 @@ public class HashtagController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		// session에서 받아온 로그인값 변수선언
-		Member member = (Member)session.getAttribute("loginMember");
-		String memberId = member.getMemberId();
+		String memberId = (String)session.getAttribute("loginMember");
 		// calendar에서 a태그로 보내준 요청값 저장
 		int targetYear = Integer.parseInt(request.getParameter("targetYear"));
 		int targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
