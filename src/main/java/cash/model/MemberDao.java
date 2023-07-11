@@ -11,10 +11,9 @@ import cash.vo.Member;
 public class MemberDao {
 
 	// 1) 로그인 메서드
-	public Member selectMemberById(Member paramMember) {
+	public Member selectMemberById(Connection conn, Member paramMember) {
 		Member returnMember = null;
 		
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql ="SELECT member_id memberId FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
@@ -36,7 +35,6 @@ public class MemberDao {
 			try {
 				rs.close();
 				stmt.close();
-				conn.close();
 				
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -47,9 +45,8 @@ public class MemberDao {
 	}
 	
 	// 2)회원가입
-	public int insertMember(Member member) {
+	public int insertMember(Connection conn, Member member) {
 		
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql ="INSERT INTO member VALUES(?, PASSWORD(?), now(), now())";
@@ -67,7 +64,6 @@ public class MemberDao {
 		} finally {
 			try {
 				stmt.close();
-				conn.close();
 				
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -77,10 +73,9 @@ public class MemberDao {
 	}
 	
 	// 3) 회원상세정보
-	public Member selectMemberOne(String memberId) {
+	public Member selectMemberOne(Connection conn, String memberId) {
 		Member memberOne = null;
 		
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql ="SELECT * FROM member WHERE member_id = ?";
@@ -104,7 +99,6 @@ public class MemberDao {
 			try {
 				rs.close();
 				stmt.close();
-				conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -114,9 +108,8 @@ public class MemberDao {
 	}
 	
 	// 4) 회원탈퇴
-	public int removeMember(String memberId, String memberPw) {
+	public int deleteMember(Connection conn, String memberId, String memberPw) {
 		int row = 0;
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		
 		String sql ="DELETE FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
@@ -134,7 +127,6 @@ public class MemberDao {
 		} finally {
 			try {
 				stmt.close();
-				conn.close();
 				
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -144,9 +136,8 @@ public class MemberDao {
 	}
 	
 	// 5) 회원정보수정 (Member member 기존 비밀번호 확인용, modifyPw변경할비밀번호, modifyPw2변경할비밀번호재확인)
-	public int modifyMember(Member member, String modifyPw, String modifyPw2) {
+	public int updateMember(Connection conn, Member member, String modifyPw, String modifyPw2) {
 		int row = 0;
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		int cnt = 0;
@@ -167,7 +158,6 @@ public class MemberDao {
 			try {
 				rs.close();
 				stmt.close();
-				conn.close();
 				
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -192,7 +182,6 @@ public class MemberDao {
 			} finally {
 				try {
 					stmt.close();
-					conn.close();
 					
 				} catch(Exception e) {
 					e.printStackTrace();

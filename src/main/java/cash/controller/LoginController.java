@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import cash.model.MemberDao;
+import cash.service.MemberService;
 import cash.vo.Member;
 
 @WebServlet("/off/login")
@@ -63,8 +64,9 @@ public class LoginController extends HttpServlet {
 		String loginId = (String)member.getMemberId();
 		System.out.println(loginId +"login Id");
 		
-		MemberDao memberDao = new MemberDao();
-		Member loginMember = memberDao.selectMemberById(member);
+		// 서비스에서 호출
+		MemberService memberService = new MemberService();
+		Member loginMember = memberService.selectMemberId(member);
 		
 		// null 로그인실패
 		

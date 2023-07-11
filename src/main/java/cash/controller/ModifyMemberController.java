@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cash.model.MemberDao;
+import cash.service.MemberService;
 import cash.vo.Member;
 
 @WebServlet("/on/modifyMember")
@@ -43,11 +44,11 @@ public class ModifyMemberController extends HttpServlet {
 		String modifyPw2 = request.getParameter("modifyPw2");
 		
 		// dao 호출
-		MemberDao memberDao = new MemberDao();
+		MemberService memberService = new MemberService();
 		
 		Member member = new Member(loginMember, memberPw, null, null);
 		
-		int row = memberDao.modifyMember(member, modifyPw, modifyPw2);
+		int row = memberService.modifyMember(member, modifyPw, modifyPw2);
 		
 		String msg = null;
 		if(row > 0) {

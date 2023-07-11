@@ -75,6 +75,6 @@
 		</table>
 		<button id="loginBtn" type="button">로그인</button>
 	</form>
-		<a href="${pageContext.request.contextPath}/addMember">회원가입</a>
+		<a href="${pageContext.request.contextPath}/off/addMember">회원가입</a>
 </body>
 </html>

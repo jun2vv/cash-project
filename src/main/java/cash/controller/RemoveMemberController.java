@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cash.model.MemberDao;
+import cash.service.MemberService;
 import cash.vo.Member;
 
 @WebServlet("/on/removeMember")
@@ -37,8 +38,8 @@ public class RemoveMemberController extends HttpServlet {
 		String memberPw = request.getParameter("memberPw");
 		
 		// dao호출
-		MemberDao memberDao = new MemberDao();
-		int row = memberDao.removeMember(loginMember, memberPw);
+		MemberService memberService = new MemberService();
+		int row = memberService.removeMember(loginMember, memberPw);
 		
 		String msg = null;
 		if(row > 0) {

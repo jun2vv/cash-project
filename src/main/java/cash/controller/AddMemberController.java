@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cash.model.MemberDao;
+import cash.service.MemberService;
 import cash.vo.Member;
 
 
@@ -55,8 +56,8 @@ public class AddMemberController extends HttpServlet {
 		member.setMemberPw(memberPw);
 		
 		// 회원가입 DAO호출
-		MemberDao mDao = new MemberDao();
-		int row = mDao.insertMember(member);
+		MemberService memberService = new MemberService();
+		int row = memberService.addMember(member);
 		
 	    String msg = null;
 		// 회원가입 성공시
