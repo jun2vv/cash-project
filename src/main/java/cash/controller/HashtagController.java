@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cash.model.HashtagDao;
+import cash.service.HashtagService;
 import cash.vo.Member;
 
 // 선택한월을 기준으로 해시태그별리스트
@@ -35,9 +36,9 @@ public class HashtagController extends HttpServlet {
 		
 		// List객체 ,HashtagDao객체 생성후 dao호출
 		List<Map<String,Object>> list = new ArrayList<Map<String, Object>>();
-		HashtagDao hashtagDao = new HashtagDao();
+		HashtagService hashtagService = new HashtagService();
 		
-		list = hashtagDao.selectHashtagList(memberId, targetYear, targetMonth+1, hashtag);
+		list = hashtagService.selectHashtagListSerivce(memberId, targetYear, targetMonth+1, hashtag);
 		
 		
 		// request에 view로 값 전달

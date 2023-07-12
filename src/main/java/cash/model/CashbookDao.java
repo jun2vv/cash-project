@@ -97,7 +97,7 @@ public class CashbookDao {
 		return list;
 	}
 	
-	// 3) 반환값: cashbook_no 키값
+	// 3) 캐시북 추가 반환값: cashbook_no 키값을통해 해시태그 동시추가
 	public int insertCashbook(Cashbook cashbook) {
 		int cashbookNo = 0;
 		Connection conn = null;

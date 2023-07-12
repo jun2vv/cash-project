@@ -13,6 +13,8 @@ import cash.vo.Cashbook;
 import cash.vo.Hashtag;
 
 public class HashtagDao {
+	
+	// 1) 해시태그 추가
 	public int insertHashTag(Hashtag hashtag) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -44,9 +46,8 @@ public class HashtagDao {
 	}
 	
 	// 2) 매달 해시태그별 개수리스트
-	public List<Map<String, Object>> selectWordCountByMonth(String memberId, int targetYear, int targetMonth) {
+	public List<Map<String, Object>> selectWordCountByMonth(Connection conn, String memberId, int targetYear, int targetMonth) {
 		List<Map<String, Object>> list = new ArrayList<>();
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
@@ -82,7 +83,6 @@ public class HashtagDao {
 			try {
 				rs.close();
 				stmt.close();
-				conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -91,9 +91,8 @@ public class HashtagDao {
 	}
 	
 	// 3) 해시태그별(월별) 리스트
-	public List<Map<String, Object>> selectHashtagList(String memberId, int targetYear, int targetMonth, String hashtag) {
+	public List<Map<String, Object>> selectHashtagList(Connection conn, String memberId, int targetYear, int targetMonth, String hashtag) {
 		List<Map<String, Object>> list = new ArrayList<>();
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
@@ -131,7 +130,6 @@ public class HashtagDao {
 			try {
 				rs.close();
 				stmt.close();
-				conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}

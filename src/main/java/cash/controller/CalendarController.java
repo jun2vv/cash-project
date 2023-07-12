@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import cash.model.CashbookDao;
 import cash.model.HashtagDao;
+import cash.service.HashtagService;
 import cash.vo.Cashbook;
 import cash.vo.Member;
 
@@ -80,8 +81,8 @@ public class CalendarController extends HttpServlet {
 		
 		// Hashtag 호출 DAO
 		List<Map<String, Object>> htList = new ArrayList<Map<String, Object>>();
-		HashtagDao hashtagDao = new HashtagDao();
-		htList = hashtagDao.selectWordCountByMonth(loginMember, targetYear, targetMonth+1);
+		HashtagService hashtagService = new HashtagService();
+		htList = hashtagService.selectWordCountByMonthService(loginMember, targetYear, targetMonth+1);
 		System.out.println(htList.size());
 		
 		// (HttpServletRequest request 안에 값 저장해서 사용)
