@@ -16,7 +16,7 @@ public class HashtagService {
 	// 2번 dao 월별 해시태그개수 리스트 (그달에 해시태그별 목록들
 	public List<Map<String, Object>> selectWordCountByMonthService(String memberId, int targetYear, int targetMonth) {
 		List<Map<String, Object>> list = new ArrayList<>();
-		
+		// 해시태그 dao사용을위한 객체생성
 		this.hashtagDao = new HashtagDao();
 		conn = null;
 		try {
