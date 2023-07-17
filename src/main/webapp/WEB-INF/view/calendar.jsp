@@ -120,7 +120,8 @@
 					<c:if test="${!(d > 0 && d <= lastDate)}">
 						<td></td>
 					</c:if>
-				</c:forEach>				
+				</c:forEach>	
+			</tr>			
 		</table>
 		
 		<!--  

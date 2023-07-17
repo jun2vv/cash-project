@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import cash.model.CashbookDao;
 import cash.model.HashtagDao;
+import cash.service.CashbookService;
 import cash.vo.Cashbook;
 import cash.vo.Hashtag;
 import cash.vo.Member;
@@ -61,7 +62,6 @@ public class AddCashbookController extends HttpServlet {
 		int price = Integer.parseInt(request.getParameter("price"));
 		String memo = request.getParameter("memo");
 		
-		
 		Cashbook cashbook = new Cashbook();
 		// 추가할 데이터 CashbookVO에 입력
 		cashbook.setMemberId(loginMember);
@@ -70,55 +70,19 @@ public class AddCashbookController extends HttpServlet {
 		cashbook.setPrice(price);
 		cashbook.setMemo(memo);
 		
-		CashbookDao cashbookDao = new CashbookDao();
-		int cashbookNo = cashbookDao.insertCashbook(cashbook); // key값 반환
-		
-		// 입력성공시 1반환
-		if(cashbookNo == 0) {
-			System.out.println(cashbookNo + "입력실패");
-			response.sendRedirect(request.getContextPath()+"/on/calendar");
-			return;
-			
-		}
-		
-		System.out.println(cashbookNo + "입력성공");
-		// 입력실패시 0반환
+		Hashtag hashtag = new Hashtag();
 		
 		
-		// 입력성공시 -> 해시태그 있다면 -> 해시태그 추출 -> 해시태그 입력(반복)
-		// 해시태그 추출 알고리즘
-		HashtagDao hashtagDao = new HashtagDao();
+		CashbookService cashbookService = new CashbookService();
 		
-		int hashtagRow = 0;
-		memo = cashbook.getMemo();
-		String memo2 = memo.replace("#", " #"); // "#구디아카데미" -> " #구디아카데미" 이런식으로 #앞에 공백이 생기도록 바꾼다.
+		int row = cashbookService.addCashbookHasttag(cashbook, hashtag);
 		
-		Set<String> set = new HashSet<String>(); // 중복된 해시태그방지를 위해 set자료구조를 사용
-		
-		// 해시태그가 여러개라면 반복해서 입력.
-		for(String ht : memo2.split(" ")) {  // issue : split된 배열을 Set으로 변경하면 중복된 내용 제거 가능
-			if (ht.startsWith("#")) {
-				String ht2 = ht.replace("#", ""); // #을없앤다.
-				if(ht.length() > 0) {
-					set.add(ht2);
-				
-				}
-			}
-		}
-		
-		for(String s : set) {
-			Hashtag hashtag = new Hashtag();
-			hashtag.setCashbookNo(cashbookNo);
-			hashtag.setWord(s);
-			hashtagRow = hashtagDao.insertHashTag(hashtag);
-		}
-		
-		if(hashtagRow > 0) {
-			System.out.println(hashtagRow + "해쉬태그 입력성공");
+		if(row > 0) {
+			System.out.println(row + "캐시북 추가성공");
 			response.sendRedirect(request.getContextPath()+"/on/calendar");
 			return;
 		}
-			System.out.println(hashtagRow + "해쉬태그 입력실패");
+			System.out.println(row + "캐시북 추가실패");
 		response.sendRedirect(request.getContextPath()+"/on/calendar");
 	}
 

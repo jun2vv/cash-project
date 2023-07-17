@@ -16,15 +16,13 @@ import cash.vo.Member;
 public class CashbookDao {
 	
 	// 1) 전체 달력에 표시할 데이터
-	public List<Cashbook> selectCashbookListByMonth(String memberId, int targetYear, int targetMonth) {
+	public List<Cashbook> selectCashbookListByMonth(Connection conn, String memberId, int targetYear, int targetMonth) {
 		List<Cashbook> list = new ArrayList<>();
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql ="SELECT cashbook_no cashbookNo, category, price, cashbook_date cashbookDate FROM cashbook WHERE member_id = ? AND year(cashbook_date) = ? AND month(cashbook_date) = ? ORDER BY cashbook_date";
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, memberId);
 			stmt.setInt(2, targetYear);
@@ -46,7 +44,6 @@ public class CashbookDao {
 			try {
 				rs.close();
 				stmt.close();
-				conn.close();
 				
 			} catch(Exception e) {
 				e.printStackTrace();
@@ -56,16 +53,14 @@ public class CashbookDao {
 	}
 	
 	// 2) 날짜별 상세보기
-	public List<Cashbook> dateOneList(String loginMember, int targetYear, int targetMonth, int targetDate) {
+	public List<Cashbook> dateOneList(Connection conn, String loginMember, int targetYear, int targetMonth, int targetDate) {
 		List<Cashbook> list = new ArrayList<>();
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql ="SELECT cashbook_no cashbookNo, category, price, memo, updatedate, createdate\r\n"
 				+ "FROM cashbook \r\n"
 				+ "WHERE member_id = ? AND year(cashbook_date) = ? AND month(cashbook_date) = ? AND DAY(cashbook_date) = ?";
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, loginMember);
 			stmt.setInt(2, targetYear);
@@ -89,7 +84,6 @@ public class CashbookDao {
 			try {
 				rs.close();
 				stmt.close();
-				conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -98,9 +92,8 @@ public class CashbookDao {
 	}
 	
 	// 3) 캐시북 추가 반환값: cashbook_no 키값을통해 해시태그 동시추가
-	public int insertCashbook(Cashbook cashbook) {
+	public int insertCashbook(Connection conn, Cashbook cashbook) {
 		int cashbookNo = 0;
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql ="INSERT INTO cashbook(member_id, category, cashbook_date, price, memo, updatedate, createdate) VALUES(?, ?, ?, ?, ?, now(), now())";
@@ -128,7 +121,6 @@ public class CashbookDao {
 			try {
 				rs.close();
 				stmt.close();
-				conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -138,16 +130,14 @@ public class CashbookDao {
 	}
 	
 	// 4) 해시태그별 전체리스트
-	public List<Cashbook> selectCashbookListByTag(String memberId, String word, int beginRow, int rowPerPage) {
+	public List<Cashbook> selectCashbookListByTag(Connection conn, String memberId, String word, int beginRow, int rowPerPage) {
 		List<Cashbook> list = new ArrayList<>();
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		
 		String sql="SELECT c.cashbook_no cashbookNo, c.category, c.cashbook_date cashbookDate, c.price, c.memo, c.updatedate, c.createdate FROM cashbook c INNER JOIN hashtag h ON c.cashbook_no = h.cashbook_no WHERE c.member_id = ? AND h.word = ? ORDER BY c.cashbook_date DESC LIMIT ?, ?";
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, memberId);
 			stmt.setString(2, word);
@@ -175,7 +165,6 @@ public class CashbookDao {
 			try {
 				rs.close();
 				stmt.close();
-				conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -184,15 +173,13 @@ public class CashbookDao {
 	}
 	
 	// 4-1) 해시태그별 전체리스트의 count(*) 페이징용
-	public int selectCashbookListByTagCnt(String memberId, String word) {
+	public int selectCashbookListByTagCnt(Connection conn, String memberId, String word) {
 		int totalRow = 0;
-		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		String sql="SELECT count(*) FROM cashbook c INNER JOIN hashtag h ON c.cashbook_no = h.cashbook_no WHERE c.member_id = ? AND h.word = ? ORDER BY c.cashbook_date DESC";
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, memberId);
 			stmt.setString(2, word);
@@ -208,7 +195,6 @@ public class CashbookDao {
 			try {
 				rs.close();
 				stmt.close();
-				conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}

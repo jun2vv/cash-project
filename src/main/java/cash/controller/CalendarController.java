@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import cash.model.CashbookDao;
 import cash.model.HashtagDao;
+import cash.service.CashbookService;
 import cash.service.HashtagService;
 import cash.vo.Cashbook;
 import cash.vo.Member;
@@ -77,7 +78,7 @@ public class CalendarController extends HttpServlet {
 		System.out.println(totalCell + "totalCell");
 		
 		// 모델을 호출(DAO 타겟 월의 수입/지출 데이터)
-		List<Cashbook> list = new CashbookDao().selectCashbookListByMonth(loginMember, targetYear, targetMonth+1);
+		List<Cashbook> list = new CashbookService().selectCashbookListByMonth(loginMember, targetYear, targetMonth+1);
 		
 		// Hashtag 호출 DAO
 		List<Map<String, Object>> htList = new ArrayList<Map<String, Object>>();

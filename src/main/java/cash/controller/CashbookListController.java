@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cash.model.CashbookDao;
+import cash.service.CashbookService;
 import cash.vo.Cashbook;
 import cash.vo.Member;
 
@@ -31,12 +32,12 @@ public class CashbookListController extends HttpServlet {
 		
 		
 		
-		CashbookDao cashbookDao = new CashbookDao();
+		CashbookService cashbookServiceDao = new CashbookService();
 	
 		// ----------페이징 처리-------------
 		//현재페이지 변수
 		int currentPage = 1;
-		if(request.getParameter("currentPage") != null){
+		if(request.getParameter("currentPage") != null) {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		// 페이지당 출력할 행의 수
@@ -46,7 +47,7 @@ public class CashbookListController extends HttpServlet {
 		int beginRow = (currentPage-1) * rowPerPage;
 		
 		// 전체 행번호 호출
-		int totalRow = cashbookDao.selectCashbookListByTagCnt(loginMember, hashtag);
+		int totalRow = cashbookServiceDao.selectCashbookListByTagCnt(loginMember, hashtag);
 		
 		int lastPage = totalRow / rowPerPage;
 		//rowPerPage가 딱 나뉘어 떨어지지 않으면 그 여분을 보여주기 위해 +1
@@ -70,7 +71,7 @@ public class CashbookListController extends HttpServlet {
 		// ----------페이징 끝-------------
 		
 		List<Cashbook> list = new ArrayList<>();
-		list = cashbookDao.selectCashbookListByTag(loginMember, hashtag, beginRow, rowPerPage);
+		list = cashbookServiceDao.selectCashbookListByTag(loginMember, hashtag, beginRow, rowPerPage);
 		
 		// 변수값들을 요청 객체에 저장
 		// 페이징변수

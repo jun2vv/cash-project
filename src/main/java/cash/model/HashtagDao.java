@@ -15,15 +15,13 @@ import cash.vo.Hashtag;
 public class HashtagDao {
 	
 	// 1) 해시태그 추가
-	public int insertHashTag(Hashtag hashtag) {
-		Connection conn = null;
+	public int insertHashTag(Connection conn, Hashtag hashtag) {
 		PreparedStatement stmt = null;
 		int row = 0;
 		
 		String sql ="INSERT INTO hashtag(cashbook_no, word, updatedate, createdate) VALUES(?, ?, now(), now())";
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, hashtag.getCashbookNo());
 			stmt.setString(2, hashtag.getWord());
@@ -36,7 +34,6 @@ public class HashtagDao {
 		} finally {
 			try {
 				stmt.close();
-				conn.close();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}

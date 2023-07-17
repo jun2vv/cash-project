@@ -12,6 +12,8 @@ import cash.model.HashtagDao;
 public class HashtagService {
 	private HashtagDao hashtagDao;
 	Connection conn = null;
+	// 1번 dao는 CashbookService에서 트랜젝션 처리
+	
 	
 	// 2번 dao 월별 해시태그개수 리스트 (그달에 해시태그별 목록들
 	public List<Map<String, Object>> selectWordCountByMonthService(String memberId, int targetYear, int targetMonth) {

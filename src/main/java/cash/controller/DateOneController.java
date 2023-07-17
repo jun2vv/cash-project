@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import cash.model.CashbookDao;
+import cash.service.CashbookService;
 import cash.vo.Cashbook;
 import cash.vo.Member;
 
@@ -61,7 +62,7 @@ public class DateOneController extends HttpServlet {
 		
 		
 		// Dao호출
-		List<Cashbook> list = new CashbookDao().dateOneList(loginMember, targetYear, targetMonth+1, targetDate);
+		List<Cashbook> list = new CashbookService().dateOneList(loginMember, targetYear, targetMonth+1, targetDate);
 		
 		// view에 보낼 값 request에 저장
 		request.setAttribute("list", list);
