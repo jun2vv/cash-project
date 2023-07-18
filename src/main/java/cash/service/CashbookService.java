@@ -72,6 +72,7 @@ public class CashbookService {
 		
 		try {
 			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			// dao하나만 실행시 자동커밋되지 않도록 오토커밋 false
 			conn.setAutoCommit(false);
 			
 			int keyNo = cashbookDao.insertCashbook(conn, cashbook);
@@ -103,6 +104,7 @@ public class CashbookService {
 					row = hashtagDao.insertHashTag(conn, hashtag);
 				}
 			}
+			// 에러없이 트랜잭션 정상처리 됬다면 커밋실행
 			conn.commit();
 		}catch (Exception e) {
 			e.printStackTrace();
