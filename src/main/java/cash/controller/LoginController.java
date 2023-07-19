@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 		request.setAttribute("msg", msg);
 		 
 		
-		
+		// 포워드방식으로 view에 값전달
 		request.getRequestDispatcher("/WEB-INF/view/login.jsp").forward(request, response);
 	}
 	@Override
