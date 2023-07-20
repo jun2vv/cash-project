@@ -20,7 +20,7 @@ public class CashbookDao {
 		List<Cashbook> list = new ArrayList<>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql ="SELECT cashbook_no cashbookNo, category, price, cashbook_date cashbookDate FROM cashbook WHERE member_id = ? AND year(cashbook_date) = ? AND month(cashbook_date) = ? ORDER BY cashbook_date";
+		String sql ="SELECT cashbook_no cashbookNo, category, price, cashbook_date cashbookDate, memo FROM cashbook WHERE member_id = ? AND year(cashbook_date) = ? AND month(cashbook_date) = ? ORDER BY cashbook_date";
 		
 		try {
 			stmt = conn.prepareStatement(sql);
@@ -35,6 +35,7 @@ public class CashbookDao {
 				c.setCategory(rs.getString("category"));;
 				c.setPrice(rs.getInt("price"));
 				c.setCashbookDate(rs.getString("cashbookDate"));
+				c.setMemo(rs.getString("memo"));
 				list.add(c);
 			}
 			 
