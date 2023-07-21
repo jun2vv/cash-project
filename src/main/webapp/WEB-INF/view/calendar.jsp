@@ -40,7 +40,7 @@
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                	<span style="color: white;">${loginMember}님 ${targetYear}년 ${targetMonth+1}월 목록</span>
+                	<span style="color: white;">${loginMember}님 ${targetYear}년 ${targetMonth+1}월 - ${minusPrice}원 + ${plusPrice}원</span>
                 </div>
             </form>
             <!-- Navbar-->
@@ -105,8 +105,11 @@
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
-                        <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        <div class="small">
+                        	<a href="http://3.37.133.115/Shopping/main/home.jsp">
+                        		내일주말
+                        	</a>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -127,16 +130,16 @@
 						<a href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
 						<a style="text-align: right;" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
 					</div>
-					<script>
-					  $(document).ready(function() {
-					    $('.hashtag-toggle').click(function(e) {
-					      e.preventDefault();
-					      $(this).siblings('.hashtag-list').slideToggle();
-					    });dmdj
-					  });
-					</script>
 					<div>
 					<h2>해시태그</h2>
+				        <script>
+						  $(document).ready(function() {
+						    $('.hashtag-toggle').click(function(e) {
+						      e.preventDefault();
+						      $(this).siblings('.hashtag-list').slideToggle();
+						    });
+						  });
+						</script>
 						<div>
 				    		<nav>
 				      			<ul>
@@ -218,11 +221,15 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div class="text-muted">Copyright &copy; cashbook</div>
                             <div>
-                                <a href="#">Privacy Policy</a>
+                                <a href="https://ko-kr.facebook.com/">
+                                	<img width="30px;" height="30px;" src="${pageContext.request.contextPath}/icon/face.png">
+                                </a>
                                 &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                                <a href="https://www.instagram.com/">
+                                	<img width="30px;" height="30px;" src="${pageContext.request.contextPath}/icon/insta.png">
+                                </a>
                             </div>
                         </div>
                     </div>

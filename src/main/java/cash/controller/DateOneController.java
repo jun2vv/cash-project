@@ -34,12 +34,14 @@ public class DateOneController extends HttpServlet {
 		
 		// 월별 hashtag리스트에서 보내준 cashbookDate값
 		if(request.getParameter("cashbookDate") != null) {
+			System.out.println("DateOneController 날짜 if 실행");
 			targetYear = Integer.parseInt(request.getParameter("targetYear"));
 			targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
 			targetDate = Integer.parseInt(request.getParameter("cashbookDate"));
 		}
 		// 전체날짜 cashbookListByTag에서 보내준 cashbookDateByTag값
 		else if(request.getParameter("cashbookDateByTag") !=null) {
+			System.out.println("DateOneController 날짜 else if 실행");
 			// 년도만 추출
 			targetYear = Integer.parseInt(request.getParameter("cashbookDateByTag").substring(0, 4));
 			// 월만 추출 자바코드로 월을 보내주는게 아닌 쿼리에서 뽑은 데이터로 보내주는거라 -1을 해줘야 한다
@@ -47,6 +49,7 @@ public class DateOneController extends HttpServlet {
 			// 일만 추출
 			targetDate = Integer.parseInt(request.getParameter("cashbookDateByTag").substring(8, 10));
 		} else {
+			System.out.println("DateOneController 날짜 else 실행");
 			targetYear = Integer.parseInt(request.getParameter("targetYear"));
 			targetMonth = Integer.parseInt(request.getParameter("targetMonth"));
 			targetDate = Integer.parseInt(request.getParameter("targetDate"));

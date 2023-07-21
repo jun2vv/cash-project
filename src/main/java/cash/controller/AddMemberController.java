@@ -34,17 +34,6 @@ public class AddMemberController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(this.getClass()+", "+request.getRequestURL()+"doPost");
-		/*
-		// 요청값
-		if(request.getParameter("memberId") == null
-			|| request.getParameter("memberPw") == null
-			|| request.getParameter("memberId").equals("")
-			|| request.getParameter("memberPw").equals("")) {
-			
-			response.sendRedirect(request.getContextPath()+"/WEB-INF/view/addMember.jsp");
-			return;
-		}
-		*/
 		
 		String memberId = request.getParameter("memberId");
 		String memberPw = request.getParameter("memberPw");

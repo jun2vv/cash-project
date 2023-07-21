@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -124,6 +125,29 @@ public class CashbookService {
 		return row;
 	}
 	
+	// 3-1) cashbook삭제
+	public int deleteCashbook(int cashbookNo) {
+		int row = 0;
+		this.cashbookDao = new CashbookDao();
+		conn = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			row = cashbookDao.deleteCashbook(conn, cashbookNo);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return row;
+	}
+	
 	// 4) 4번dao
 	public List<Cashbook> selectCashbookListByTag(String memberId, String word, int beginRow, int rowPerPage) {
 		List<Cashbook> list = new ArrayList<>();
@@ -166,6 +190,30 @@ public class CashbookService {
 		}
 		
 		return totalRow;
+	}
+	
+	
+	// 5) 5번dao
+	public Cashbook selectMonthTotalMinusPrice(String memberid, int targetYear, int targetMonth, String category) {
+		Cashbook resultCashbook = new Cashbook();
+		this.cashbookDao = new CashbookDao();
+		conn = null;
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			resultCashbook = cashbookDao.selectMonthTotalMinusPrice(conn, memberid, targetYear, targetMonth, category);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return resultCashbook;
 	}
 	
 }

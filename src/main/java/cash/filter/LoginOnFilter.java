@@ -30,7 +30,7 @@ public class LoginOnFilter extends HttpFilter implements Filter {
 		// 로그인 되어 있을때 지나가는 필터이므로 로그인 안되어있으면 login컨트롤러로 보냄
 		if(session.getAttribute("loginMember") == null) {
 			HttpServletResponse rep = (HttpServletResponse)response;
-			rep.sendRedirect(req.getContextPath()+"/login");
+			rep.sendRedirect(req.getContextPath()+"/off/login");
 			return;
 			
 		}

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -34,6 +34,9 @@
 					
 					$('#loginForm').submit();
 				});
+				<c:if test="${msg != null}">
+					alert('${msg}')
+				</c:if>
 			});
 		</script>
     </head>
@@ -47,16 +50,7 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                    	<%
-											String msg = (String)request.getAttribute("msg");
-											if(msg != null) {
-										%>
-												<script>
-													alert(${msg});
-												</script>
-										<% 
-											}
-										%>
+										
 										<!--  el코드도 출력은된다
 											<p>msg</p>
 										-->
@@ -75,7 +69,7 @@
                                                 <input class="form-check-input" type="checkbox" name="idSave" value="y">id저장
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <button class="btn btn-primary" id="loginBtn" type="button">로그인</button>
+                                            	<button class="btn btn-primary" id="loginBtn" type="button">로그인</button>
                                             </div>
                                         </form>
                                     </div>
@@ -92,11 +86,15 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div class="text-muted">Copyright &copy; cashbook</div>
                             <div>
-                                <a href="#">Privacy Policy</a>
+                                <a href="https://ko-kr.facebook.com/">
+                                	<img width="30px;" height="30px;" src="${pageContext.request.contextPath}/icon/face.png">
+                                </a>
                                 &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                                <a href="https://www.instagram.com/">
+                                	<img width="30px;" height="30px;" src="${pageContext.request.contextPath}/icon/insta.png">
+                                </a>
                             </div>
                         </div>
                     </div>

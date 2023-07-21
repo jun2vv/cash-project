@@ -80,11 +80,20 @@ public class CalendarController extends HttpServlet {
 		// 모델을 호출(service 타겟 월의 수입/지출 데이터)
 		List<Cashbook> list = new CashbookService().selectCashbookListByMonth(loginMember, targetYear, targetMonth+1);
 		
-		// Hashtag 호출 DAO
+		// Hashtag 호출 
 		List<Map<String, Object>> htList = new ArrayList<Map<String, Object>>();
 		HashtagService hashtagService = new HashtagService();
 		htList = hashtagService.selectWordCountByMonthService(loginMember, targetYear, targetMonth+1);
 		System.out.println(htList.size());
+		
+		// 현재달 전체 지출내역 호출
+		String category = "지출";
+		Cashbook cashbook = new CashbookService().selectMonthTotalMinusPrice(loginMember, targetYear, targetMonth+1, category);
+		System.out.println("CalendarController minusPriceMap" + cashbook.getPrice());
+		
+		String plusCateogry = "수입";
+		Cashbook plusCashbook = new CashbookService().selectMonthTotalMinusPrice(loginMember, targetYear, targetMonth+1, plusCateogry);
+		System.out.println("CalendarController minusPriceMap" + plusCashbook.getPrice());
 		
 		// (HttpServletRequest request 안에 값 저장해서 사용)
 		request.setAttribute("targetYear", targetYear);
@@ -95,6 +104,11 @@ public class CalendarController extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		request.setAttribute("htList", htList);
+		
+		request.setAttribute("minusPrice", cashbook.getPrice());
+		request.setAttribute("plusPrice", plusCashbook.getPrice());
+		
+		
 		
 		
 		// 오늘 날짜에 색상표시를 위해 현재날짜 데이터 보냄

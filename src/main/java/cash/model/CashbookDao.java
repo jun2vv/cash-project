@@ -130,6 +130,34 @@ public class CashbookDao {
 		return cashbookNo;
 	}
 	
+	// 3-1) 캐시북 삭제 hashtag cascade설정으로 자동삭제
+	public int deleteCashbook(Connection conn, int cashbookNo) {
+		int row = 0;
+		PreparedStatement stmt = null;
+		String sql ="DELETE FROM cashbook WHERE cashbook_no = ?";
+		
+		try {
+			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, cashbookNo);
+			System.out.println(stmt + "deleteCashbook DAO");
+			
+			row = stmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return row;
+	}
+	
+	
 	// 4) 해시태그별 전체리스트
 	public List<Cashbook> selectCashbookListByTag(Connection conn, String memberId, String word, int beginRow, int rowPerPage) {
 		List<Cashbook> list = new ArrayList<>();
@@ -201,5 +229,39 @@ public class CashbookDao {
 			}
 		}
 		return totalRow;
+	}
+	
+	// 5) 현재달 총 사용금액
+	public Cashbook selectMonthTotalMinusPrice(Connection conn, String memberid, int targetYear, int targetMonth, String category) {
+		Cashbook cashbook = new Cashbook();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		String sql="SELECT sum(price) price \r\n"
+				+ "FROM cashbook \r\n"
+				+ "WHERE member_id = ? AND YEAR(cashbook_date) = ? AND MONTH(cashbook_date) = ? AND category = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberid);
+			stmt.setInt(2, targetYear);
+			stmt.setInt(3, targetMonth);
+			stmt.setString(4, category);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				cashbook.setPrice(rs.getInt("price"));
+			}
+			System.out.println("selectMonthTotalMinusPrice stmt --->" + stmt);
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return cashbook;
 	}
 }

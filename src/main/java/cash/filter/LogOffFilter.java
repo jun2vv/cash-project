@@ -31,7 +31,7 @@ public class LogOffFilter extends HttpFilter implements Filter {
 		// 로그인이 되어 있지않을때 지나가는 필터이므로 로그인 되어있으면 calendar컨트롤러로 보냄
 		if(session.getAttribute("loginMember") != null) {
 			HttpServletResponse rep = (HttpServletResponse)response;
-			rep.sendRedirect(req.getContextPath()+"/cashbook");
+			rep.sendRedirect(req.getContextPath()+"/on/cashbook");
 			return;
 		}
 		
