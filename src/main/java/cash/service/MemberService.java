@@ -21,7 +21,7 @@ public class MemberService {
 		
 		try {
 			// conn.getAutoCommit(false);
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.37.133.115:3306/cash","root","java1234");
 			resultMember = memberDao.selectMemberById(conn, member);
 		} catch(Exception e) {
 			// conn.rollback();
@@ -44,7 +44,7 @@ public class MemberService {
 		
 		try {
 			// conn.getAutoCommit(false);
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.37.133.115:3306/cash","root","java1234");
 			row = memberDao.insertMember(conn, member);
 		} catch(Exception e) {
 			// conn.rollback();
@@ -68,7 +68,7 @@ public class MemberService {
 		
 		try {
 			// conn.getAutoCommit(false);
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.37.133.115:3306/cash","root","java1234");
 			resultMember = memberDao.selectMemberOne(conn, memberId);
 		} catch(Exception e) {
 			// conn.rollback();
@@ -92,7 +92,7 @@ public class MemberService {
 		
 		try {
 			// conn.getAutoCommit(false);
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.37.133.115:3306/cash","root","java1234");
 			row = memberDao.deleteMember(conn, memberId, memberPw);
 		} catch(Exception e) {
 			// conn.rollback();
@@ -116,7 +116,7 @@ public class MemberService {
 		
 		try {
 			// conn.getAutoCommit(false);
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
+			conn = DriverManager.getConnection("jdbc:mariadb://3.37.133.115:3306/cash","root","java1234");
 			row = memberDao.updateMember(conn, member, modifyPw, modifyPw2);
 		} catch(Exception e) {
 			// conn.rollback();
