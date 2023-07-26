@@ -56,12 +56,13 @@
 										-->
                                         <form id="loginForm" method="post" action="${pageContext.request.contextPath}/off/login">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="loginId" type="text" name="memberId" value="${cookieId}">
+                                            																		<!-- value값에 ${cookieId}넣어야 함. -->
+                                                <input class="form-control" id="loginId" type="text" name="memberId" value="admin">
                                                  <label for="inputEmail">id</label>
 												<span id="loginIdMsg" class="msg"></span>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="loginPw" type="password" name="memberPw">
+                                                <input class="form-control" id="loginPw" type="password" name="memberPw" value="1234">
                                                 <label for="inputPassword">Password</label>
 												<span id="loginPwMsg" class="msg"></span>
                                             </div>
