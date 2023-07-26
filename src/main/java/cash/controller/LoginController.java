@@ -36,7 +36,6 @@ public class LoginController extends HttpServlet {
 			}
 		}
 		
-		
 		// alert창을 띄울 메세지 
 		String msg = null;
 		if(request.getParameter("msg")!= null) {

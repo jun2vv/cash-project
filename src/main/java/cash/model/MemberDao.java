@@ -19,7 +19,6 @@ public class MemberDao {
 		String sql ="SELECT member_id memberId FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, paramMember.getMemberId());
 			stmt.setString(2, paramMember.getMemberPw());
@@ -53,7 +52,6 @@ public class MemberDao {
 		int row = 0;
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, member.getMemberId());
 			stmt.setString(2, member.getMemberPw());
@@ -81,7 +79,6 @@ public class MemberDao {
 		String sql ="SELECT * FROM member WHERE member_id = ?";
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, memberId);
 			rs = stmt.executeQuery();
@@ -115,7 +112,6 @@ public class MemberDao {
 		String sql ="DELETE FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, memberId);
 			stmt.setString(2, memberPw);
@@ -143,7 +139,6 @@ public class MemberDao {
 		int cnt = 0;
 		String ckSql = "SELECT count(*) FROM member WHERE member_id = ? AND member_pw = PASSWORD(?)";
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(ckSql);
 			stmt.setString(1, member.getMemberId());
 			stmt.setString(2, member.getMemberPw());
@@ -170,7 +165,6 @@ public class MemberDao {
 			String sql ="UPDATE member SET member_pw = PASSWORD(?), updatedate = now() WHERE member_id = ?";
 			
 			try {
-				conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, modifyPw2);
 				stmt.setString(2, member.getMemberId());

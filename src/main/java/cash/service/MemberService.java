@@ -113,7 +113,6 @@ public class MemberService {
 	public int modifyMember(Member member, String modifyPw, String modifyPw2) {
 		this.memberDao = new MemberDao();
 		int row =0;
-		
 		try {
 			// conn.getAutoCommit(false);
 			conn = DriverManager.getConnection("jdbc:mariadb://3.37.133.115:3306/cash","root","java1234");

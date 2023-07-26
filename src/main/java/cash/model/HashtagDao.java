@@ -42,6 +42,32 @@ public class HashtagDao {
 		return row;
 	}
 	
+	// 1-1) 해시태그 삭제
+	public int deleteHashTag(Connection conn, int cashbookNo) {
+		PreparedStatement stmt = null;
+		int row = 0;
+		
+		String sql="DELETE FROM hashtag WHERE cashbook_no = ?";
+		
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, cashbookNo);
+			row = stmt.executeUpdate();
+			
+			System.out.println(stmt + "deleteHashTag DAO");
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return row;
+	}
+	
 	// 2) 매달 해시태그별 개수리스트
 	public List<Map<String, Object>> selectWordCountByMonth(Connection conn, String memberId, int targetYear, int targetMonth) {
 		List<Map<String, Object>> list = new ArrayList<>();
@@ -58,7 +84,6 @@ public class HashtagDao {
 				+ " ORDER BY COUNT(*) DESC";
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, memberId);
 			stmt.setInt(2, targetYear);
@@ -99,7 +124,6 @@ public class HashtagDao {
 				+ "WHERE c.member_id = ? AND year(c.cashbook_date) = ? AND MONTH(c.cashbook_date) = ? AND h.word = ?\r\n"
 				+ "ORDER BY c.createdate DESC;";
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, memberId);
 			stmt.setInt(2, targetYear);

@@ -1,6 +1,7 @@
 package cash.model;
 
 import java.beans.Statement;
+
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -101,7 +102,6 @@ public class CashbookDao {
 		
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, cashbook.getMemberId());
 			stmt.setString(2, cashbook.getCategory());
@@ -137,7 +137,6 @@ public class CashbookDao {
 		String sql ="DELETE FROM cashbook WHERE cashbook_no = ?";
 		
 		try {
-			conn = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/cash","root","java1234");
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, cashbookNo);
 			System.out.println(stmt + "deleteCashbook DAO");

@@ -1,6 +1,7 @@
 package cash.service;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -127,15 +128,35 @@ public class CashbookService {
 	
 	// 3-1) cashbook삭제
 	public int deleteCashbook(int cashbookNo) {
-		int row = 0;
+		
+		int cashRow = 0;
+		int hashtagRow = 0;
 		this.cashbookDao = new CashbookDao();
+		this.hashtagDao = new HashtagDao();
+		
 		conn = null;
 		try {
+			// 트랜젝션 처리를 위해 오토커밋 꺼둔다.
+			conn.setAutoCommit(false);
 			conn = DriverManager.getConnection("jdbc:mariadb://3.37.133.115:3306/cash","root","java1234");
-			row = cashbookDao.deleteCashbook(conn, cashbookNo);
+			hashtagRow = hashtagDao.deleteHashTag(conn, cashbookNo);
+			System.out.println("CashbookService.deleteCashbook() hashtagRow :" + hashtagRow);
+			
+			if(hashtagRow >= 0) {
+				cashRow = cashbookDao.deleteCashbook(conn, cashbookNo);
+				System.out.println("CashbookService.deleteCashbook() cashRow :" + cashRow);
+				// 제대로 삭제가 완료됬다면 커밋한다.
+				conn.commit();
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		} finally {
 			try {
 				conn.close();
@@ -144,8 +165,7 @@ public class CashbookService {
 				e.printStackTrace();
 			}
 		}
-		
-		return row;
+		return cashRow;
 	}
 	
 	// 4) 4번dao
