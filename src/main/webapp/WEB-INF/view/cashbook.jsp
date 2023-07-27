@@ -59,7 +59,7 @@
 	}
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Cashbook</title>
 </head>
 <body>
 	<h1>Home</h1>
