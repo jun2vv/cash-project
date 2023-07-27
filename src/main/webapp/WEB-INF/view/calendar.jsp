@@ -127,8 +127,8 @@
 				<div class="container">
 					<h2 style="text-align: center;">${targetYear}년 ${targetMonth+1}월</h2>
 					<div>
-						<a href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
-						<a style="text-align: right;" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
+						<a style="color: black;" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
+						<a style="color: black;" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
 					</div>
 					<div>
 					<h2>해시태그</h2>
