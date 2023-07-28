@@ -38,6 +38,29 @@ public class HashtagService {
 		return list;
 	}
 	
+	// 2-1번 dao 연도별 해시태그개수 리스트 
+	public List<Map<String, Object>> selectWordCountByYearService(String memberId, int targetYear) {
+		List<Map<String, Object>> list = new ArrayList<>();
+		// 해시태그 dao사용을위한 객체생성
+		this.hashtagDao = new HashtagDao();
+		conn = null;
+		try {
+			// conn.getAutoCommit(false);
+			conn = DriverManager.getConnection("jdbc:mariadb://3.37.133.115:3306/cash","root","java1234");
+			list = hashtagDao.selectWordCountByYear(conn, memberId, targetYear);
+		} catch(Exception e) {
+			// conn.rollback();
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 	// 3번 dao 해시태그별(월별) 리스트
 	public List<Map<String, Object>> selectHashtagListSerivce(String memberId, int targetYear, int targetMonth, String hashtag) {
 		List<Map<String, Object>> list = new ArrayList<>();

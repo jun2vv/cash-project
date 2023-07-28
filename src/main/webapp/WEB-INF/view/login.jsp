@@ -70,7 +70,7 @@
                                                 <input class="form-check-input" type="checkbox" name="idSave" value="y">id저장
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            	<button class="btn btn-primary" id="loginBtn" type="button">로그인</button>
+                                            	<button class="btn btn-secondary" id="loginBtn" type="button">로그인</button>
                                             </div>
                                         </form>
                                     </div>

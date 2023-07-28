@@ -33,6 +33,11 @@
 						$('#addPwMsg').text('');
 					}
 					
+					if($('#addPw').val() != $('#addCheckPw').val()) {
+						alert('비밀번호가 일치하지 않습니다.')
+						return;
+					}
+					
 					$('#addMemberForm').submit();
 				});
 			});
@@ -46,14 +51,14 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">회원가입</h3></div>
                                     <div class="card-body">
                                         <form id="addMemberForm" method="post" action="${pageContext.request.contextPath}/off/addMember">
                                             <div class="row mb-3">
                                                 <div class="col-md-12">
                                                     <div class="form-floating mb-3 mb-md-0">
                                                         <input class="form-control" id="addId" type="text" name="memberId">
-                                                        <label for="inputFirstName">id</label>
+                                                        <label for="inputFirstName">아이디</label>
 														<span id="addIdMsg"></span>
                                                     </div>
                                                 </div>
@@ -66,11 +71,19 @@
                                             </div>
                                             -->
                                             <div class="row mb-3">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
                                                     <div class="form-floating">
-                                                        <input class="form-control" id="addPw" type="text" name="memberPw">
-                                                        <label for="inputLastName">password</label>
+                                                        <input class="form-control" id="addPw" type="password" name="memberPw">
+                                                        <label for="inputLastName">비밀번호</label>
 														<span id="addPwMsg"></span>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input class="form-control" id="addCheckPw" type="password" name="memberPw">
+                                                        <label for="inputLastName">비밀번호 확인</label>
+														<span id="addCheckPwMsg"></span>
                                                     </div>
                                                 </div>
                                                 
@@ -90,12 +103,12 @@
                                                 -->
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><button class="btn btn-primary btn-block" id="addMemberBtn" type="button">회원가입</button></div>
+                                                <div class="d-grid"><button class="btn btn-secondary btn-block" id="addMemberBtn" type="button">회원가입</button></div>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="${pageContext.request.contextPath}/off/login">Have an account? Go to login</a></div>
+                                        <div class="small"><a href="${pageContext.request.contextPath}/off/login">계정이 있으신가요? 로그인으로 가세요!</a></div>
                                     </div>
                                 </div>
                             </div>

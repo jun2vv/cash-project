@@ -80,11 +80,16 @@ public class CalendarController extends HttpServlet {
 		// 모델을 호출(service 타겟 월의 수입/지출 데이터)
 		List<Cashbook> list = new CashbookService().selectCashbookListByMonth(loginMember, targetYear, targetMonth+1);
 		
-		// Hashtag 호출 
-		List<Map<String, Object>> htList = new ArrayList<Map<String, Object>>();
+		// Hashtag(월별) 호출 
+		List<Map<String, Object>> htMonthList = new ArrayList<Map<String, Object>>();
 		HashtagService hashtagService = new HashtagService();
-		htList = hashtagService.selectWordCountByMonthService(loginMember, targetYear, targetMonth+1);
-		System.out.println(htList.size());
+		htMonthList = hashtagService.selectWordCountByMonthService(loginMember, targetYear, targetMonth+1);
+		System.out.println(htMonthList.size());
+		
+		// Hashtag(연도별) 호출 
+		List<Map<String, Object>> htYearList = new ArrayList<Map<String, Object>>();
+		htYearList = hashtagService.selectWordCountByYearService(loginMember, targetYear);
+		System.out.println(htYearList.size());
 		
 		// 현재달 전체 지출내역 호출
 		String category = "지출";
@@ -103,7 +108,8 @@ public class CalendarController extends HttpServlet {
 		request.setAttribute("beginBlank", beginBlank);
 		
 		request.setAttribute("list", list);
-		request.setAttribute("htList", htList);
+		request.setAttribute("htMonthList", htMonthList);
+		request.setAttribute("htYearList", htYearList);
 		
 		request.setAttribute("minusPrice", cashbook.getPrice());
 		request.setAttribute("plusPrice", plusCashbook.getPrice());

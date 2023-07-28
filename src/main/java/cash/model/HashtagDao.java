@@ -68,7 +68,7 @@ public class HashtagDao {
 		return row;
 	}
 	
-	// 2) 매달 해시태그별 개수리스트
+	// 2) 매월 해시태그별 개수리스트
 	public List<Map<String, Object>> selectWordCountByMonth(Connection conn, String memberId, int targetYear, int targetMonth) {
 		List<Map<String, Object>> list = new ArrayList<>();
 		PreparedStatement stmt = null;
@@ -98,6 +98,46 @@ public class HashtagDao {
 			}
 			
 			System.out.println(stmt + "selectWordCountByMonth DAO");
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				stmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
+	// 2-1) 연도별 해시태그 개수리스트
+	public List<Map<String, Object>> selectWordCountByYear(Connection conn, String memberId, int targetYear) {
+		List<Map<String, Object>> list = new ArrayList<>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT word, COUNT(*) cnt\r\n"
+				+ "FROM hashtag h INNER JOIN cashbook c\r\n"
+				+ "ON h.cashbook_no = c.cashbook_no\r\n"
+				+ "WHERE c.member_id = ?\r\n"
+				+ "AND YEAR(c.cashbook_date) = ?\r\n"
+				+ "GROUP BY word\r\n"
+				+ "ORDER BY COUNT(*) DESC";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberId);
+			stmt.setInt(2, targetYear);
+			
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("word", rs.getString("word"));
+				map.put("cnt", rs.getString("cnt"));
+				list.add(map);
+			}
+			System.out.println(stmt + "selectWordCountByYear DAO");
 			
 		} catch(Exception e) {
 			e.printStackTrace();

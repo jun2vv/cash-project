@@ -125,11 +125,11 @@
 					<!-- 자바코드(제어문) if,for문 대신 JSTL 사용 -->
 					
 				<div class="container">
-					<h2 style="text-align: center;">${targetYear}년 ${targetMonth+1}월</h2>
-					<div>
-						<a style="color: black;" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}">이전달</a>
-						<a style="color: black;" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}">다음달</a>
-					</div>
+					<div style="text-align: center;">
+						<h2>${targetYear}년 ${targetMonth+1}월</h2>
+						<a class="btn btn-secondary" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}"><span>이전달</span></a>
+						<a class="btn btn-secondary" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}"><span>다음달</span></a>
+					</div>	
 					<div>
 					<h2>해시태그</h2>
 				        <script>
@@ -146,7 +146,7 @@
 				        			<li>
 							        	<a style="color: black;" href="#" class="hashtag-toggle">전체해시태그</a>
 							    			<ul class="hashtag-list">
-							           			<c:forEach var="map" items="${htList}">
+							           			<c:forEach var="map" items="${htYearList}">
 							              			<span>
 							                			<a style="color: #3f729b;" href="${pageContext.request.contextPath}/on/cashbookListByTag?hashtag=${map.word}">${map.word}(${map.cnt})</a>
 							              			</span>
@@ -156,7 +156,7 @@
 							        <li>
 							          	<a style="color: black;" href="#" class="hashtag-toggle">월별해시태그</a>
 							         		<ul class="hashtag-list">
-							            		<c:forEach var="map" items="${htList}">
+							            		<c:forEach var="map" items="${htMonthList}">
 							              			<span>
 							                			<a style="color: #3f729b;" href="${pageContext.request.contextPath}/on/hashtag?targetYear=${targetYear}&targetMonth=${targetMonth}&hashtag=${map.word}">${map.word}(${map.cnt})</a>
 							              			</span>

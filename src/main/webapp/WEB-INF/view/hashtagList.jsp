@@ -149,7 +149,7 @@
                 <main>
                 	<br>
                 	<br>
-                   	<h1>${hashtag}(월별태그) 목록</h1>
+                   	<h1>${hashtag}(${targetMonth+1}월태그) 목록</h1>
 					<table>
 						<thead>
 							<tr>
