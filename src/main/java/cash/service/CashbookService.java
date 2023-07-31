@@ -136,9 +136,11 @@ public class CashbookService {
 		
 		conn = null;
 		try {
+			conn = DriverManager.getConnection("jdbc:mariadb://3.37.133.115:3306/cash","root","java1234");
+			
 			// 트랜젝션 처리를 위해 오토커밋 꺼둔다.
 			conn.setAutoCommit(false);
-			conn = DriverManager.getConnection("jdbc:mariadb://3.37.133.115:3306/cash","root","java1234");
+			
 			hashtagRow = hashtagDao.deleteHashTag(conn, cashbookNo);
 			System.out.println("CashbookService.deleteCashbook() hashtagRow :" + hashtagRow);
 			
