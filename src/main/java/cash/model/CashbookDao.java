@@ -1,4 +1,4 @@
-package cash.model;
+ package cash.model;
 
 import java.beans.Statement;
 
@@ -34,7 +34,7 @@ public class CashbookDao {
 				Cashbook c = new Cashbook();
 				c.setCashbookNo(rs.getInt("cashbookNo"));
 				c.setCategory(rs.getString("category"));;
-				c.setPrice(rs.getInt("price"));
+				c.setPrice(rs.getLong("price"));
 				c.setCashbookDate(rs.getString("cashbookDate"));
 				c.setMemo(rs.getString("memo"));
 				list.add(c);
@@ -74,7 +74,7 @@ public class CashbookDao {
 				Cashbook c = new Cashbook();
 				c.setCashbookNo(rs.getInt("cashbookNo"));
 				c.setCategory(rs.getString("category"));;
-				c.setPrice(rs.getInt("price"));
+				c.setPrice(rs.getLong("price"));
 				c.setMemo(rs.getString("memo"));
 				c.setUpdatedate(rs.getString("updatedate"));
 				c.setCreatedate(rs.getString("createdate"));
@@ -106,7 +106,7 @@ public class CashbookDao {
 			stmt.setString(1, cashbook.getMemberId());
 			stmt.setString(2, cashbook.getCategory());
 			stmt.setString(3, cashbook.getCashbookDate());
-			stmt.setInt(4, cashbook.getPrice());
+			stmt.setLong(4, cashbook.getPrice());
 			stmt.setString(5, cashbook.getMemo());
 			System.out.println(stmt + "insertCashbook DAO");
 			
@@ -130,7 +130,7 @@ public class CashbookDao {
 		return cashbookNo;
 	}
 	
-	// 3-1) 캐시북 삭제 hashtag cascade설정으로 자동삭제
+	// 3-1) 캐시북 삭제
 	public int deleteCashbook(Connection conn, int cashbookNo) {
 		int row = 0;
 		PreparedStatement stmt = null;
@@ -246,7 +246,7 @@ public class CashbookDao {
 			stmt.setString(4, category);
 			rs = stmt.executeQuery();
 			if(rs.next()) {
-				cashbook.setPrice(rs.getInt("price"));
+				cashbook.setPrice(rs.getLong("price"));
 			}
 			System.out.println("selectMonthTotalMinusPrice stmt --->" + stmt);
 			

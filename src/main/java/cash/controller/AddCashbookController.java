@@ -59,7 +59,7 @@ public class AddCashbookController extends HttpServlet {
 		// 데이터 입력 요청값 
 		String date = request.getParameter("date");
 		String category = request.getParameter("category");
-		int price = Integer.parseInt(request.getParameter("price"));
+		long price = Long.parseLong(request.getParameter("price"));
 		String memo = request.getParameter("memo");
 		
 		Cashbook cashbook = new Cashbook();

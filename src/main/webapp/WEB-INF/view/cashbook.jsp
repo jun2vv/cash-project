@@ -16,7 +16,7 @@
 	  font-size: 28px;
 	  text-align: center;
 	  margin-bottom: 30px;
-	  color: #007bff;
+	  color: #353535;
 	  padding-top: 30px;
 	}
 	
@@ -47,15 +47,15 @@
 	.links a {
 	  margin: 0 10px;
 	  padding: 8px 16px;
-	  border: 1px solid #007bff;
+	  border: 1px solid #353535;
 	  border-radius: 5px;
 	  text-decoration: none;
-	  color: #007bff;
+	  color: #353535;
 	}
 	
 	.links a:hover {
-	  background-color: #007bff;
-	  color: #fff;
+	  background-color: #D5D5D5;
+	  color: #000000;
 	}
 </style>
 <meta charset="UTF-8">

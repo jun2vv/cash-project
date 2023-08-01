@@ -5,7 +5,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
+import cash.vo.Cashbook;
 import cash.vo.Member;
 
 public class MemberDao {
@@ -129,6 +131,39 @@ public class MemberDao {
 			}
 		}
 		return row;
+	}
+	// 4-1) 회원탈퇴시 (id에 맞는 cashbook 데이터 조회)
+	public ArrayList<Cashbook> selectCashbookNoById(Connection conn, String memberId) {
+		ArrayList<Cashbook> cashbookList = new ArrayList<>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT cashbook_no\r\n"
+					+ "FROM cashbook \r\n"
+					+ "WHERE member_id = ?";
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, memberId);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				Cashbook cashbook = new Cashbook();
+				cashbook.setCashbookNo(rs.getInt("cashbook_no"));
+				cashbookList.add(cashbook);
+			}
+			System.out.println("selectCashbookNoById cashbookList.size() :" +cashbookList.size());
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				stmt.close();
+				
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return cashbookList;
 	}
 	
 	// 5) 회원정보수정 (Member member 기존 비밀번호 확인용, modifyPw변경할비밀번호, modifyPw2변경할비밀번호재확인)

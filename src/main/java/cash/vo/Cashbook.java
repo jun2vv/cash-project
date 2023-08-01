@@ -5,7 +5,7 @@ public class Cashbook {
 	private String memberId;
 	private String category;
 	private String cashbookDate;
-	private int price;
+	private long price;
 	private String memo;
 	private String updatedate;
 	private String createdate;
@@ -15,7 +15,7 @@ public class Cashbook {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Cashbook(int cashbookNo, String memberId, String category, String cashbookDate, int price, String memo,
+	public Cashbook(int cashbookNo, String memberId, String category, String cashbookDate, long price, String memo,
 			String updatedate, String createdate) {
 		super();
 		this.cashbookNo = cashbookNo;
@@ -55,10 +55,10 @@ public class Cashbook {
 	public void setCashbookDate(String cashbookDate) {
 		this.cashbookDate = cashbookDate;
 	}
-	public int getPrice() {
+	public long getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
 	public String getMemo() {

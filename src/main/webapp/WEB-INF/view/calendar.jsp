@@ -19,6 +19,78 @@
   .hashtag-list.active {
     display: block;
   }
+  
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      font-family: Arial, sans-serif;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #eee;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    td {
+      height: 100px;
+      width: 100px;
+      position: relative;
+    }
+
+    a {
+      color: black;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .income {
+      color: green;
+    }
+
+    .expense {
+      color: red;
+    }
+
+    .weekend {
+      background-color: #f2f2f2;
+    }
+
+    .current-day {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .day-number {
+      font-size: 24px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    .entry-list {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+    }
+
+    .entry-item {
+      margin-bottom: 5px;
+    }
 </style>
     <head>
         <meta charset="utf-8" />
@@ -169,7 +241,7 @@
 					</div>
 					<br>
 					
-					<table class="table table-striped">
+					<table>
 						<tr>
 							<th>일</th>
 							<th>월</th>
@@ -198,10 +270,10 @@
 											<c:if test="${d == fn:substring(c.cashbookDate,8,10)}">
 												<div>
 													<c:if test="${c.category == '수입' }">
-														<span>+${c.price}</span>
+														<span class="income">+${c.price}</span>
 													</c:if>
 													<c:if test="${c.category == '지출' }">
-														<span style="color: red;">-${c.price}</span>
+														<span class="expense">-${c.price}</span>
 													</c:if>
 												</div>
 											</c:if>

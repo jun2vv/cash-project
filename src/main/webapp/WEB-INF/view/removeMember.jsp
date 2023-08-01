@@ -163,7 +163,7 @@
 									</td>
 								</tr>
 							</table>
-						<button type="submit">탈퇴하기</button>
+						<button class="btn btn-dark" type="submit">탈퇴하기</button>
 						</form>
 					</div>
                 </main>

@@ -3,8 +3,12 @@ package cash.service;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import cash.model.CashbookDao;
+import cash.model.HashtagDao;
 import cash.model.MemberDao;
+import cash.vo.Cashbook;
 import cash.vo.Member;
 
 public class MemberService {
@@ -85,17 +89,43 @@ public class MemberService {
 		return resultMember;
 	}
 	
-	// 4번 dao 회원탈퇴
+	// 4번 dao 회원탈퇴 회원탈퇴시 그 회원의 cashbook과 hashtag전부 삭제
 	public int removeMember(String memberId, String memberPw) {
 		this.memberDao = new MemberDao();
+		HashtagDao hashtagDao = new HashtagDao();
+		CashbookDao cashbookDao = new CashbookDao();
+		
 		int row =0;
+		int hashtagRow = 0;
+		conn = null;
 		
 		try {
-			// conn.getAutoCommit(false);
 			conn = DriverManager.getConnection("jdbc:mariadb://3.37.133.115:3306/cash","root","java1234");
-			row = memberDao.deleteMember(conn, memberId, memberPw);
+			conn.setAutoCommit(false);
+			// ArrayList에다가 cashbookNo를 아이디로 조회해서 담는다.
+			ArrayList<Cashbook> cashbookNoList = memberDao.selectCashbookNoById(conn, memberId);
+			// 그 후 지워야할 데이터가 있거나 없어도 hashtag를 cashbookNo키값으로 지운다
+			if(cashbookNoList.size() >= 0 ) {
+				for(Cashbook c : cashbookNoList) {
+					hashtagRow = hashtagDao.deleteHashTag(conn, c.getCashbookNo());
+					
+					// 지워진 해시태그가 있다면 cashbook을 지운다.
+					if(hashtagRow > 0) {
+						cashbookDao.deleteCashbook(conn, c.getCashbookNo());
+					}
+				}
+				// 그 후 회원 삭제.
+				row = memberDao.deleteMember(conn, memberId, memberPw);
+			}
+			
+			conn.commit();
 		} catch(Exception e) {
-			// conn.rollback();
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			e.printStackTrace();
 		} finally {
 			try {
