@@ -196,17 +196,13 @@
 						
 					<!-- 자바코드(제어문) if,for문 대신 JSTL 사용 -->
 					
-				<div class="container">
-					<div style="text-align: center;">
-						<h2>${targetYear}년 ${targetMonth+1}월</h2>
-						<a class="btn btn-secondary" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}"><span>이전달</span></a>
-						<a class="btn btn-secondary" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}"><span>다음달</span></a>
-					</div>	
-					<div>
-					<h2>해시태그</h2>
+				<div class="row">
+					<div class="col-lg-2"> 
+					<br>
+					<h3>해시태그</h3>
 				        <script>
 						  $(document).ready(function() {
-						    $('.hashtag-toggle').click(function(e) {
+						  	$('.hashtag-toggle').click(function(e) {
 						      e.preventDefault();
 						      $(this).siblings('.hashtag-list').slideToggle();
 						    });
@@ -216,7 +212,7 @@
 				    		<nav>
 				      			<ul>
 				        			<li>
-							        	<a style="color: black;" href="#" class="hashtag-toggle">전체해시태그</a>
+							        	<a style="color: black;" href="#" class="hashtag-toggle">${targetYear}년해시태그</a>
 							    			<ul class="hashtag-list">
 							           			<c:forEach var="map" items="${htYearList}">
 							              			<span>
@@ -226,7 +222,7 @@
 							          		</ul>
 							       	</li>
 							        <li>
-							          	<a style="color: black;" href="#" class="hashtag-toggle">월별해시태그</a>
+							          	<a style="color: black;" href="#" class="hashtag-toggle">${targetMonth+1}월해시태그</a>
 							         		<ul class="hashtag-list">
 							            		<c:forEach var="map" items="${htMonthList}">
 							              			<span>
@@ -240,7 +236,13 @@
 						</div>
 					</div>
 					<br>
-					
+					<div class="col-lg-9"> 
+					<div style="text-align: center;">
+						<h2>${targetYear}년 ${targetMonth+1}월</h2>
+						<a class="btn btn-secondary" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth-1}"><span>이전달</span></a>
+						<a class="btn btn-secondary" href="${pageContext.request.contextPath}/on/calendar?targetYear=${targetYear}&targetMonth=${targetMonth+1}"><span>다음달</span></a>
+					</div>
+					<br>	
 					<table>
 						<tr>
 							<th>일</th>
@@ -280,7 +282,6 @@
 										</c:forEach>
 									</td>
 								</c:if>
-								
 								<!-- 공백출력 -->
 								<c:if test="${!(d > 0 && d <= lastDate)}">
 									<td></td>
@@ -288,6 +289,7 @@
 							</c:forEach>
 						</tr>			
 					</table>
+					</div>
 					</div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
