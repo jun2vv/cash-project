@@ -34,11 +34,11 @@
 					
 					$('#loginForm').submit();
 				});
-				<c:if test="${msg != null}">
-					alert('${msg}')
-				</c:if>
 			});
 		</script>
+		<c:if test="${msg != null}">
+			alert('${msg}')
+		</c:if>
     </head>
     <body class="bg-primary">
         <div id="layoutAuthentication">
@@ -57,7 +57,8 @@
                                         <form id="loginForm" method="post" action="${pageContext.request.contextPath}/off/login">
                                             <div class="form-floating mb-3">
                                             																		<!-- value값에 ${cookieId}넣어야 함. -->
-                                                <input class="form-control" id="loginId" type="text" name="memberId" value="admin">
+                                                <input class="form-control" id="loginId" type="text" name="memberId" value="${cookieId}">
+                                                id : admin
                                                  <label for="inputEmail">id</label>
 												<span id="loginIdMsg" class="msg"></span>
                                             </div>
